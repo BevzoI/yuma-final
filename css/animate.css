@@ -1,0 +1,82 @@
+.points {
+  overflow: hidden;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  z-index: -1;
+  color: #000;
+}
+.points .point {
+  --size: 50px;
+  --bd-size: 6px;
+  --color-num: 0.04;
+  --bd-color: rgba(241, 73, 28, var(--color-num));
+  --duration: 50s;
+  --name: p1;
+
+  z-index: 999;
+  position: absolute;
+  border-radius: 50%;
+  width: var(--size);
+  height: var(--size);
+  border: var(--bd-size) solid var(--bd-color);
+  animation-iteration-count: infinite;
+  animation-duration: var(--duration);
+  animation-name: var(--name);
+}
+
+.points .point:nth-child(even) {
+  background-image: url("data:image/svg+xml,%0A%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23fadfd5' stroke-width='3'%3E%3Cline x1='18' y1='6' x2='6' y2='18'%3E%3C/line%3E%3Cline x1='6' y1='6' x2='18' y2='18'%3E%3C/line%3E%3C/svg%3E");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 0;
+  border: none;
+}
+
+@keyframes p1 {
+  0% { left: 75%; top: 0%; }
+  100% { left: 0%; top: 75%;}
+}
+
+@keyframes p2 {
+  0% { left: 0%; top: 8%; }
+  100% { left: 0%; top: 75%;}
+}
+
+@keyframes p3 {
+  0% { left: 30%; top: 85%; }
+  100% { left: 45%; top: 0%;}
+}
+
+@keyframes p4 {
+  0% { left: 95%; top: 45%; }
+  100% { left: 40%; top: 35%;}
+}
+
+@keyframes p5 {
+  0% { left: 45%; top: 95%; }
+  100% { left: 50%; top: 0%;}
+}
+
+@keyframes p6 {
+  0% { left: 45%; top: 10%; }
+  100% { left: 50%; top: 70%;}
+}
+
+@keyframes p7 {
+  0% { left: 5%; top: 10%; }
+  100% { left: 50%; top: 10%;}
+}
+
+@keyframes p8 {
+  0% { left: 0%; top: 20%; }
+  100% { left: 50%; top: 20%;}
+}
+
+@keyframes p9 {
+  0% { left: 95%; top: 8%; }
+  100% { left: 45%; top: 92%;}
+}
