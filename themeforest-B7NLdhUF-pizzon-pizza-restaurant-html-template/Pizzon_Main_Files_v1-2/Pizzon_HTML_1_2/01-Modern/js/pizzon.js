@@ -100,7 +100,7 @@ $(function() {
         // ***** Price Rang bar Start ***** //
         if ($(".range-slider").length > 0) {
             const settings={
-                fill: '#fbb200',
+                fill: '#f1491c',
                 background: '#e4ded9'
             }
 
