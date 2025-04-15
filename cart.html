@@ -1,361 +1,205 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="cs">
 <head>
-	<!-- Basic Page Needs -->
-	<title>YU-MA pizza</title>
-	<meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  $1
+  <style>
+    body.dark-mode {
+      background-color: #1e1e1e;
+      color: #f5f5f5;
+    }
+    body.dark-mode .form-control,
+    body.dark-mode .form-select {
+      background-color: #2c2c2c;
+      color: #f5f5f5;
+      border-color: #f1491c;
+    }
+    body.dark-mode .form-control::placeholder,
+    body.dark-mode .form-select::placeholder {
+      color: #aaa;
+    }
+    body.dark-mode .alert {
+      background-color: #f1491c;
+      color: #fff;
+    }
+    body.dark-mode .list-group-item {
+      background-color: #2c2c2c;
+      color: #f5f5f5;
+      border-color: #444;
+    }
+    body.dark-mode .btn {
+      background-color: #f1491c;
+      border-color: #f1491c;
+    }
+    @media (max-width: 768px) {
+      .container > div {
+        padding: 1.5rem !important;
+        border-radius: 12px !important;
+      }
+      h1 {
+        font-size: 1.5rem !important;
+      }
+      .form-label {
+        font-size: 0.95rem;
+      }
+      .form-control, .form-select {
+        font-size: 0.95rem;
+      }
+      button[type="submit"] {
+        font-size: 1rem !important;
+        padding: 0.6rem 1rem !important;
+      }
+      .list-group-item {
+        font-size: 0.95rem;
+        padding: 0.5rem 0.75rem;
+      }
+    }
+  </style>
+  
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+$1
+<body class="bg-yellow position-relative overflow-hidden" onload="autoDarkMode()">
+  <div class="container min-vh-100 d-flex justify-content-center align-items-center position-relative overflow-hidden" style="z-index: 2;">
+    <div class="animate__animated animate__fadeIn w-100" style="max-width: 500px; background-color: #fff; padding: 2rem; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); z-index: 2; margin-inline: auto;">
+    
+    <h1 class="mb-4 text-center text-uppercase" style="color: #f1491c; font-weight: bold;">Váš košík</h1>
+    <div id="empty-cart-message" class="text-center text-muted mb-4" style="display: none; font-size: 1.1rem;">Košík je prázdný.</div>
+<ul id="cart-items" class="list-group mb-4"></ul>
+<p class="fw-bold" style="color: #333; text-align: center; font-size: 1.2rem;">Celkem: <span id="cart-total">0</span> Kč</p>
 
-    <!-- CSS -->
-    <link type="image/x-icon" href="./images/yuma/favicon.svg" rel="icon">
-    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="css/style.css">
-</head>
-<body>
+    <form id="cartOrderForm" class="needs-validation d-flex flex-column w-100" novalidate style="margin-top: 2rem; gap: 1.5rem;">
+      <div class="w-100">
+        <label for="customerName" class="form-label">Vaše jméno</label>
+        <input type="text" class="form-control w-100" style="border-radius: 8px; border-color: #f1491c;" id="customerName" name="customer_name" required />
+      </div>
+      <div class="col-12">
+        <label for="customerEmail" class="form-label">Váš e-mail</label>
+        <input type="email" class="form-control w-100" style="border-radius: 8px; border-color: #f1491c;" id="customerEmail" name="customer_email" required />
+      </div>
+      <div class="col-12">
+        <label for="customerPhone" class="form-label">Telefon</label>
+        <input type="tel" class="form-control w-100" style="border-radius: 8px; border-color: #f1491c;" id="customerPhone" name="customer_phone" required />
+      </div>
+      <div class="col-12">
+        <label for="customerAddress" class="form-label">Adresa</label>
+        <input type="text" class="form-control" style="border-radius: 8px; border-color: #f1491c;" id="customerAddress" name="customer_address" required />
+      </div>
+      <div class="col-12">
+        <label for="deliveryTime" class="form-label">Čas doručení</label>
+        <select class="form-select w-100" style="border-radius: 8px; border-color: #f1491c; font-size: 1.1rem; padding: 0.6rem 1rem; height: auto;" id="deliveryTime" name="delivery_time" required></select>
+      </div>
+      <button type="submit" class="btn w-100 text-uppercase" style="background-color:#f1491c; border-color:#f1491c; color: #fff; padding: 0.85rem 1.25rem; font-weight: bold; border-radius: 12px; font-size: 1.1rem; letter-spacing: 0.5px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">Odeslat objednávku</button>
+    </form>
+    </div>
+  </div>
 
-	<!-- Preloader Start -->
-	<div id="preloader" class="preloader">
-		<div class="preloader-box">
-			<img src="images/preloader.svg" alt="preloader">
-		</div>
-	</div>
-	<!-- Preloader End -->
+  <script src="https://cdn.emailjs.com/dist/email.min.js">function autoDarkMode() {
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    document.body.classList.add('dark-mode');
+  }
+}
+</script>
+  <script>
+    emailjs.init("YOUR_PUBLIC_KEY");
 
-	<!-- Header Start -->
-	<header>
-		<div class="header-vacter">
-		  <img src="images/header-img.png" alt="Vacter Image" />
-		</div>
-		<div class="container-big">
-		  <div class="header-inner">
-			<div class="row align-items-center">
-			  <div class="col-xl-3 col-lg-3 col-md-3 col-5">
-				<div class="header-logo">
-				  <a href="index.html"
-					><img src="./images/yuma/logo.svg" alt="Brand Logo"
-				  /></a>
-				</div>
-			  </div>
-			  <div class="col-xl-9 col-lg-9 col-md-9 col-7">
-				<div class="main-menu">
-				  <div class="menu-toggle">
-					<span></span>
-				  </div>
-				  <div class="menu">
-					<div class="sidemenu-header">
-					  <div class="sidemenu-logo">
-						<img src="./images/yuma/logo.svg" alt="Brand Logo" />
-					  </div>
-					  <div class="sidemenu-close">
-						<span></span>
-					  </div>
-					</div>
-					<ul>
-					  <li class="active"><a href="index.html">Domů</a></li>
-					  <li>
-						<span class="opener"></span>
-						<a href="javascript:void(0)">Menu</a>
-						<ul class="dropdown-content">
-						  <li><a href="shop-list.html">Pizza</a></li>
-						  <li><a href="shop-detail.html">Sushi</a></li>
-						  <li><a href="cart.html">Nápoje</a></li>
-						  <li><a href="checkout.html">Něco navíc</a></li>
-						</ul>
-					  </li>
-					  <li>
-						<span class="opener"></span>
-						<a href="javascript:void(0)">Novinky</a>
-						<ul class="dropdown-content">
-							<li><a href="about.html">Nové pizzy v nabídce</a></li>
-							<li><a href="our-menu.html">Akční nabídky a slevy</a></li>
-							<li><a href="our-team.html">Ze zákulisí pece</a></li>
-							<li><a href="book-now.html">Pizza měsíce</a></li>
-							<li><a href="404.html">Řekli jste o nás</a></li>
-						</ul>
-					  </li>
-					  <li>
-						<span class="opener"></span>
-						<a href="javascript:void(0)">O nás</a>
-						<ul class="dropdown-content">
-							<li><a href="blog-right.html">Naše příběh</a></li>
-							<li><a href="blog-left.html">Náš tým</a></li>
-							<li><a href="blog-detail.html">Naše hodnoty</a></li>
-						</ul>
-					  </li>
-					  <li><a href="contact-us.html">Kontakt</a></li>
-					</ul>
-				  </div>
-				  <div class="icon-menu">
-					<ul>
-					  <li class="search">
-						<a href="javascript:void(0)">
-						  <img
-							src="images/search-icon.png"
-							class="normal-icon"
-							alt="Search Icon"
-						  />
-						  <img
-							src="images/search-icon-2.png"
-							class="hover-icon"
-							alt="Search Icon"
-						  />
-						</a>
-					  </li>
-					  <li class="cart-slide position-r">
-						<a href="javascript:void(0)">
-						  <img
-							src="images/cart-icon.png"
-							class="normal-icon"
-							alt="Cart Icon"
-						  />
-						  <img
-							src="images/cart-icon-2.png"
-							class="hover-icon"
-							alt="Cart Icon"
-						  />
-						  <span class="cart-count">0</span>
-						</a>
-					  </li>
-					</ul>
-				  </div>
-				</div>
-			  </div>
-			</div>
-		  </div>
-		</div>
-	  </header>
-	<!-- Header End -->
+    const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+    const cartList = document.getElementById("cart-items");
+    const cartTotal = document.getElementById("cart-total");
 
+    function renderCart() {
+      let total = 0;
+      cartList.innerHTML = "";
 
-	<!-- Start Of Main Div -->
-	<main class="main">
+      cartItems.forEach((item, index) => {
+        const price = parseInt(item.price.replace(/\D/g, ""));
+        total += price;
 
-		<!-- Start Of 404 -->
-		<section class="error-part ptb-100">
-			<div class="container">
-				<div class="error-box">
-					<div class="error-img position-r wow fadeInUp">
-						<img src="./images/yuma/ChatGPT Image 6 квіт. 2025 р., 10_29_17.png" alt="error-img">
-						<div class="error-top">
-							<img src="images/error-top.png" alt="error-top">
-						</div>
-					</div>
-					<div class="error-content text-center wow fadeInUp">
-						<h1 class="error-title">Pracujeme na tom, aby vše bylo perfektní!</h1>
-						<p>Zavolejte nám na <a class="link mobile-menu-phone-link" href="tel:+420776800436"
-							>+420 776-800-436</a> a objednejte si svou oblíbenou pizzu!</p>
-						<a href="index.html" class="btn-ct">Zpět na hlavní stránku</a>
-					</div>
-				</div>
-			</div>
-		</section>
-		<!-- End Of 404 -->		
+        const li = document.createElement("li");
+        li.className = "list-group-item d-flex justify-content-between align-items-center";
+        li.innerHTML = `
+          ${item.name} - ${item.price}
+          <button class="btn btn-sm btn-danger" onclick="removeItem(${index})">×</button>
+        `;
+        cartList.appendChild(li);
+      });
 
-	</main>
-	<!-- End Of Main Div -->
+      cartTotal.textContent = total;
+    }
 
+    function removeItem(index) {
+      cartItems.splice(index, 1);
+      localStorage.setItem("cart", JSON.stringify(cartItems));
+      renderCart();
+    }
 
-<!-- Start Of Footer -->
-<footer>
-	<div class="footer ptb-100 bg-yellow position-r overflow-h">
-	  <div class="footer-pattern-1 wow fadeInLeft animation-delay-5">
-		<img src="./images/yuma/logo.svg" alt="logo" />
-	  </div>
-	  <div class="footer-pattern-2 wow fadeInRight animation-delay-5">
-		<img src="./images/yuma/hra.png" alt="footer-pattern" />
-	  </div>
-	  <div class="container">
-		<div class="row">
-		  <div class="col-xl-3 col-lg-6 col-md-6 footer-box wow fadeInUp">
-			<h6 class="footer-title text-uppercase">Informace</h6>
-			<ul class="footer-menu">
-			  <li><a href="index.html">Domů</a></li>
-			  <li><a href="blog-left.html">Menu</a></li>
-			  <li><a href="about.html">Novinky</a></li>
-			  <li><a href="our-menu.html">O nas</a></li>
-			</ul>
-		  </div>
-		  <div class="col-xl-3 col-lg-6 col-md-6 footer-box wow fadeInUp">
-			<h6 class="footer-title text-uppercase">Kontakt</h6>
-			<ul class="footer-menu">
-			  <li><a>Adresa</a></li>
-			  <li><a
-				  class="footer-map-link"
-				  href="https://www.google.com/maps/place/Přátelství+180,+104+00+Praha+22-Uhříněves"
-				  target="_blank"
-				  rel="noopener noreferrer"
-				>
-				  Přátelství 180<br />
-				  104 00 Praha 22 – Uhříněves
-				</a></li>
-			  <li> <a class="link mobile-menu-phone-link" href="tel:+420776800436"
-				  >+420 776-800-436</a></li>
-			</ul>
-		  </div>
-		  <div class="col-xl-3 col-lg-6 col-md-6 footer-box wow fadeInUp">
-			<h6 class="footer-title text-uppercase">Otevírací doba</h6>
-			<ul class="footer-menu">
-			  <li><a>Po    10:00-22:00</a></li>
-			  <li><a>Út    10:00-22:00</a></li>
-			  <li><a>St    10:00-22:00</a></li>
-			  <li><a>Čt    10:00-22:00</a></li>
-			  <li><a>Pá    10:00-22:00</a></li>
-			  <li><a>So    10:00-22:00</a></li>
-			  <li><a>Ne    10:00-22:00</a></li>
-			</ul>
-		  </div>
-		  <div class="col-xl-3 col-lg-6 col-md-6 footer-box wow fadeInUp">
-			  <h6 class="footer-title text-uppercase">Sledujte nás na sociálních sítích</h6>
-			  <ul class="footer-social">
-				<li>
-				  <a href="#" class="facebook">
-					<i class="fa fa-facebook" aria-hidden="true"></i>
-				  </a>
-				</li>
-				<li>
-				  <a href="#" class="instagram">
-					<i class="fa fa-instagram" aria-hidden="true"></i>
-				  </a>
-				</li>
-				<li>
-				  <a href="#" class="tiktok">
-					<i class="fab fa-tiktok" aria-hidden="true"></i>
-					<span class="visually-hidden">TikTok</span>
-				  </a>
-				</li>
-			  </ul>
-			  
-			
-		  
-	<div class="copyright">
-	  <div class="container">
-		<div class="text-center">
-		  <p>
-			&#169; Všechna práva vyhrazena společnosti YU-MA Pizza © 2025
-			<a href="#">Templatescoder</a>
-		  </p>
-		</div>
-	  </div>
-	</div>
-  </footer>
-  <!-- End Of Footer -->
+    function populateDeliveryTimes() {
+      const select = document.getElementById("deliveryTime");
+      for (let hour = 10; hour < 22; hour++) {
+        const from = hour.toString().padStart(2, '0') + ":00";
+        const to = hour.toString().padStart(2, '0') + ":30";
+        const option = document.createElement("option");
+        option.value = `${from}-${to}`;
+        option.textContent = `${from} - ${to}`;
+        select.appendChild(option);
+      }
+    }
 
+    renderCart();
+    populateDeliveryTimes();
 
-	<!-- Start Of Search Popup -->
-	<div class="search-popup">
-		<div class="search-overlay"></div>
-		<div class="search-form">
-			<button class="close"></button>
-			<form>
-				<input type="text" name="search" placeholder="What are you looking for?" class="search-input">
-				<button type="submit"><img src="images/search-icon-white.png" alt="Search Icon"></button>
-			</form>
-		</div>
-	</div>
-	<!-- End Of Search Popup -->
-	
+    document.getElementById("cartOrderForm").addEventListener("submit", function (e) {
+      e.preventDefault();
 
-	<!-- Start Of Cart Drawer -->
-	<div class="cart-drawer">
-		<div class="bg-overlay"></div>
-		<div class="drawer-content">
-			<div class="w-100">
-				<div class="cart-header">
-					<h6 class="title text-uppercase">SHOPPING CART</h6>
-					<button class="close"></button>
-				</div>
-				<div class="cart-list">
-					<div class="cart-list-inner">
-						<div class="cart-item">
-							<div class="item-image">
-								<a href="shop-detail.html"><img src="images/pizza-1.png" alt="Item Image"></a>
-							</div>
-							<div class="item-detl">
-								<div class="item-name">
-									<a href="shop-detail.html">Shrimp pizza</a>
-									<a class="item-remove" href="#"><img src="images/delete.png" alt="delete"></a>
-								</div>
-								<div class="item-price">
-									<span>$35.00</span>
-								</div>
-								<div class="quantity-editer">
-									<div class="quantity">
-									  	<button type="button" class="sub minus">-</button>
-									  	<input class="count" name="quantity" type="number" value="1" min="1" max="10">
-									  	<button type="button" class="add plus">+</button>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="cart-item">
-							<div class="item-image">
-								<a href="shop-detail.html"><img src="images/pizza-2.png" alt="Item Image"></a>
-							</div>
-							<div class="item-detl">
-								<div class="item-name">
-									<a href="shop-detail.html">Seafood pizza</a>
-									<a class="item-remove" href="#"><img src="images/delete.png" alt="delete"></a>
-								</div>
-								<div class="item-price">
-									<span>$65.00</span>
-								</div>
-								<div class="quantity-editer">
-									<div class="quantity">
-									  	<button type="button" class="sub minus">-</button>
-									  	<input class="count" name="quantity" type="number" value="1" min="1" max="10">
-									  	<button type="button" class="add plus">+</button>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="cart-item">
-							<div class="item-image">
-								<a href="shop-detail.html"><img src="images/pizza-3.png" alt="Item Image"></a>
-							</div>
-							<div class="item-detl">
-								<div class="item-name">
-									<a class="item-title" href="shop-detail.html">Cheese pizza</a>
-									<a class="item-remove" href="#"><img src="images/delete.png" alt="delete"></a>
-								</div>
-								<div class="item-price">
-									<span>$45.00</span>
-								</div>
-								<div class="quantity-editer">
-									<div class="quantity">
-									  	<button type="button" class="sub minus">-</button>
-									  	<input class="count" name="quantity" type="number" value="1" min="1" max="10">
-									  	<button type="button" class="add plus">+</button>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="cart-footer">
-				<div class="sub-total">
-					<strong>Subtotal:</strong> <span class="sprice">$66.70</span>
-				</div>
-				<div class="cart-footer-des">
-					<p>Taxes and shipping calculated at checkout</p>
-				</div>
-				<div class="cart-button">
-					<ul>
-						<li><a href="cart.html" class="btn-ct btn-small">View Cart</a></li>
-						<li><a href="checkout.html" class="btn-ct btn-small subtotal">Checkout</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- End Of Cart Drawer -->
+      const templateParams = {
+        order_list: cartItems.map(item => `${item.name} - ${item.price}`).join("\n"),
+        customer_name: document.getElementById("customerName").value,
+        customer_email: document.getElementById("customerEmail").value,
+        customer_phone: document.getElementById("customerPhone").value,
+        customer_address: document.getElementById("customerAddress").value,
+        delivery_time: document.getElementById("deliveryTime").value
+      };
 
+      emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", templateParams)
+        .then(() => {
+          const confirmation = document.createElement("div");
+confirmation.className = "alert alert-success mt-4 animate__animated animate__fadeInDown";
+confirmation.textContent = "Děkujeme za objednávku! Brzy se vám ozveme.";
+document.querySelector(".container").appendChild(confirmation);
+          confirmation.style.backgroundColor = '#f1491c';
+          confirmation.style.color = '#fff';
+          confirmation.style.border = 'none';
+          confirmation.style.fontWeight = 'bold';
+          confirmation.style.textAlign = 'center';
+          confirmation.style.fontSize = '1.2rem';
+          confirmation.style.borderRadius = '10px';
+          setTimeout(() => {
+  confirmation.classList.remove("animate__fadeInDown");
+  confirmation.classList.add("animate__fadeOutUp");
+  setTimeout(() => confirmation.remove(), 1000);
+}, 5000);
 
-	<!-- Start Of Js -->
-	<script src="js/jquery-3.4.1.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/animation.js"></script>
-	<script src="js/pizzon.js"></script>
+localStorage.removeItem("cart");
+document.getElementById("cartOrderForm").reset();
+cartList.innerHTML = "";
+cartTotal.textContent = "0";
+        }, (error) => {
+          alert("Chyba při odesílání: " + error.text);
+        });
+    });
+  </script>
+  <div class="black-jamun position-absolute" style="z-index: 0; opacity: 0.4; width: 100px; top: 10%; left: 2%;">
+    <img src="images/black-jamun.png" alt="black-jamun">
+  </div>
+  <div class="onion-img position-absolute" style="z-index: 0; opacity: 0.4; width: 100px; top: 50%; left: 8%;">
+    <img src="images/onion.png" alt="onion">
+  </div>
+  <div class="tamato-img position-absolute" style="z-index: 0; opacity: 0.4; width: 100px; bottom: 20%; right: 10%;">
+    <img src="images/tamato.png" alt="tamato">
+  </div>
+  <div class="leaf-img position-absolute" style="z-index: 0; opacity: 0.4; width: 100px; top: 15%; right: 5%;">
+    <img src="images/banner-leaf.png" alt="banner-leaf">
+  </div>
 </body>
 </html>
