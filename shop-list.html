@@ -120,6 +120,24 @@
         padding: 0.5rem 1rem;
       }
     }
+	
+  @keyframes fadeInOut {
+    0% { opacity: 0; }
+    25% { opacity: 0.3; }
+    50% { opacity: 0.5; }
+    75% { opacity: 0.3; }
+    100% { opacity: 0; }
+  }
+
+  .card-img-top {
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    background-color: transparent !important;
+  }
+
+  .card:hover .card-img-top {
+    transform: scale(1.05) rotate(1deg);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  }
 	  </style>
 </head>
 <body>
