@@ -3,203 +3,205 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  $1
+  <title>Váš košík</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <link type="image/x-icon" href="./images/yuma/favicon.svg" rel="icon" />
   <style>
-    body.dark-mode {
-      background-color: #1e1e1e;
-      color: #f5f5f5;
+    body {
+      margin: 0;
+      background-color: #fffaf0;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+      position: relative;
     }
-    body.dark-mode .form-control,
-    body.dark-mode .form-select {
-      background-color: #2c2c2c;
-      color: #f5f5f5;
-      border-color: #f1491c;
+
+    .main-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      position: relative;
+      z-index: 2;
     }
-    body.dark-mode .form-control::placeholder,
-    body.dark-mode .form-select::placeholder {
-      color: #aaa;
+
+    .form-box {
+      max-width: 500px;
+      width: 100%;
+      background-color: #fff;
+      padding: 3rem 3rem 3rem 3rem; /* top right bottom left */
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      z-index: 2;
     }
-    body.dark-mode .alert {
+
+    h1 {
+      color: #f1491c;
+      font-weight: bold;
+      text-align: center;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .form-field {
+      border-radius: 8px;
+      border: 1px solid #f1491c;
+      font-size: 1.05rem;
+      padding: 0.6rem 1rem;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .form-label {
+      margin-bottom: 0.25rem;
+      font-weight: bold;
+      display: block;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.75rem;
+    }
+
+    .btn {
       background-color: #f1491c;
-      color: #fff;
+      border: none;
+      color: white;
+      padding: 0.85rem 1.25rem;
+      border-radius: 12px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      cursor: pointer;
+      text-transform: uppercase;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      width: 100%;
     }
-    body.dark-mode .list-group-item {
-      background-color: #2c2c2c;
-      color: #f5f5f5;
-      border-color: #444;
+
+    .floating-img {
+      position: absolute;
+      z-index: 0;
+      opacity: 0.4;
+      width: 80px;
+      animation: floatAround infinite ease-in-out;
     }
-    body.dark-mode .btn {
-      background-color: #f1491c;
-      border-color: #f1491c;
-    }
-    @media (max-width: 768px) {
-      .container > div {
-        padding: 1.5rem !important;
-        border-radius: 12px !important;
-      }
-      h1 {
-        font-size: 1.5rem !important;
-      }
-      .form-label {
-        font-size: 0.95rem;
-      }
-      .form-control, .form-select {
-        font-size: 0.95rem;
-      }
-      button[type="submit"] {
-        font-size: 1rem !important;
-        padding: 0.6rem 1rem !important;
-      }
-      .list-group-item {
-        font-size: 0.95rem;
-        padding: 0.5rem 0.75rem;
-      }
+
+    @keyframes floatAround {
+      0% { transform: translate(0, 0); }
+      25% { transform: translate(10px, -10px); }
+      50% { transform: translate(-10px, 10px); }
+      75% { transform: translate(5px, -5px); }
+      100% { transform: translate(0, 0); }
     }
   </style>
-  
-<link rel="stylesheet" href="css/style.css" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-$1
-<body class="bg-yellow position-relative overflow-hidden" onload="autoDarkMode()">
-  <div class="container min-vh-100 d-flex justify-content-center align-items-center position-relative overflow-hidden" style="z-index: 2;">
-    <div class="animate__animated animate__fadeIn w-100" style="max-width: 500px; background-color: #fff; padding: 2rem; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); z-index: 2; margin-inline: auto;">
-    
-    <h1 class="mb-4 text-center text-uppercase" style="color: #f1491c; font-weight: bold;">Váš košík</h1>
-    <div id="empty-cart-message" class="text-center text-muted mb-4" style="display: none; font-size: 1.1rem;">Košík je prázdný.</div>
-<ul id="cart-items" class="list-group mb-4"></ul>
-<p class="fw-bold" style="color: #333; text-align: center; font-size: 1.2rem;">Celkem: <span id="cart-total">0</span> Kč</p>
+</head>
+<body onload="initPage()">
 
-    <form id="cartOrderForm" class="needs-validation d-flex flex-column w-100" novalidate style="margin-top: 2rem; gap: 1.5rem;">
-      <div class="w-100">
-        <label for="customerName" class="form-label">Vaše jméno</label>
-        <input type="text" class="form-control w-100" style="border-radius: 8px; border-color: #f1491c;" id="customerName" name="customer_name" required />
-      </div>
-      <div class="col-12">
-        <label for="customerEmail" class="form-label">Váš e-mail</label>
-        <input type="email" class="form-control w-100" style="border-radius: 8px; border-color: #f1491c;" id="customerEmail" name="customer_email" required />
-      </div>
-      <div class="col-12">
-        <label for="customerPhone" class="form-label">Telefon</label>
-        <input type="tel" class="form-control w-100" style="border-radius: 8px; border-color: #f1491c;" id="customerPhone" name="customer_phone" required />
-      </div>
-      <div class="col-12">
-        <label for="customerAddress" class="form-label">Adresa</label>
-        <input type="text" class="form-control" style="border-radius: 8px; border-color: #f1491c;" id="customerAddress" name="customer_address" required />
-      </div>
-      <div class="col-12">
-        <label for="deliveryTime" class="form-label">Čas doručení</label>
-        <select class="form-select w-100" style="border-radius: 8px; border-color: #f1491c; font-size: 1.1rem; padding: 0.6rem 1rem; height: auto;" id="deliveryTime" name="delivery_time" required></select>
-      </div>
-      <button type="submit" class="btn w-100 text-uppercase" style="background-color:#f1491c; border-color:#f1491c; color: #fff; padding: 0.85rem 1.25rem; font-weight: bold; border-radius: 12px; font-size: 1.1rem; letter-spacing: 0.5px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">Odeslat objednávku</button>
-    </form>
+  <div class="main-wrapper">
+    <div class="form-box animate__animated animate__fadeIn">
+      <h1>Váš košík</h1>
+      <p style="text-align: center; margin-bottom: 2rem;">Celkem: <span id="cart-total">0</span> Kč</p>
+
+      <form id="cartOrderForm" novalidate>
+        <div>
+          <label for="customerName" class="form-label">Vaše jméno</label>
+          <input type="text" id="customerName" name="customer_name" class="form-field" required />
+        </div>
+        <div>
+          <label for="customerEmail" class="form-label">Váš e-mail</label>
+          <input type="email" id="customerEmail" name="customer_email" class="form-field" required />
+        </div>
+        <div>
+          <label for="customerPhone" class="form-label">Telefon</label>
+          <input type="tel" id="customerPhone" name="customer_phone" class="form-field" required />
+        </div>
+        <div>
+          <label for="customerAddress" class="form-label">Adresa</label>
+          <input type="text" id="customerAddress" name="customer_address" class="form-field" required />
+        </div>
+        <div>
+          <label for="deliveryTime" class="form-label">Čas doručení</label>
+          <select id="deliveryTime" name="delivery_time" class="form-field" required></select>
+        </div>
+        <button type="submit" class="btn">Odeslat objednávku</button>
+      </form>
     </div>
   </div>
 
-  <script src="https://cdn.emailjs.com/dist/email.min.js">function autoDarkMode() {
-  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    document.body.classList.add('dark-mode');
-  }
-}
-</script>
+  <!-- Плаваючі картинки -->
   <script>
-    emailjs.init("YOUR_PUBLIC_KEY");
+    const imagePaths = [
+      "images/yuma/cesar-removebg-preview (1).png",
+      "images/yuma/Pizza_s_Lososem_a_červeným_kaviárem-removebg-preview.png",
+      "images/yuma/Pizza_Prosciutto__hruška_a_gorgonzola-removebg-preview.png",
+      "images/yuma/Pizza_Quatro_Formaggi__4syry_-removebg-preview.png"
+    ];
 
-    const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
-    const cartList = document.getElementById("cart-items");
-    const cartTotal = document.getElementById("cart-total");
+    function createFloatingImages(count = 25) {
+      for (let i = 0; i < count; i++) {
+        const img = document.createElement("div");
+        img.classList.add("floating-img");
 
-    function renderCart() {
-      let total = 0;
-      cartList.innerHTML = "";
+        const inner = document.createElement("img");
+        inner.src = imagePaths[Math.floor(Math.random() * imagePaths.length)];
+        inner.alt = "decor";
+        inner.style.width = "100%";
 
-      cartItems.forEach((item, index) => {
-        const price = parseInt(item.price.replace(/\D/g, ""));
-        total += price;
+        img.appendChild(inner);
 
-        const li = document.createElement("li");
-        li.className = "list-group-item d-flex justify-content-between align-items-center";
-        li.innerHTML = `
-          ${item.name} - ${item.price}
-          <button class="btn btn-sm btn-danger" onclick="removeItem(${index})">×</button>
-        `;
-        cartList.appendChild(li);
-      });
+        const randomX = Math.random() * (window.innerWidth - 100);
+        const randomY = Math.random() * (window.innerHeight - 100);
+        const randomDuration = 8 + Math.random() * 8;
 
-      cartTotal.textContent = total;
-    }
+        img.style.left = `${randomX}px`;
+        img.style.top = `${randomY}px`;
+        img.style.animationDuration = `${randomDuration}s`;
 
-    function removeItem(index) {
-      cartItems.splice(index, 1);
-      localStorage.setItem("cart", JSON.stringify(cartItems));
-      renderCart();
-    }
-
-    function populateDeliveryTimes() {
-      const select = document.getElementById("deliveryTime");
-      for (let hour = 10; hour < 22; hour++) {
-        const from = hour.toString().padStart(2, '0') + ":00";
-        const to = hour.toString().padStart(2, '0') + ":30";
-        const option = document.createElement("option");
-        option.value = `${from}-${to}`;
-        option.textContent = `${from} - ${to}`;
-        select.appendChild(option);
+        document.body.appendChild(img);
       }
     }
 
-    renderCart();
-    populateDeliveryTimes();
+    function initPage() {
+      createFloatingImages();
 
-    document.getElementById("cartOrderForm").addEventListener("submit", function (e) {
-      e.preventDefault();
+      const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+      const cartList = document.getElementById("cart-items");
+      const cartTotal = document.getElementById("cart-total");
 
-      const templateParams = {
-        order_list: cartItems.map(item => `${item.name} - ${item.price}`).join("\n"),
-        customer_name: document.getElementById("customerName").value,
-        customer_email: document.getElementById("customerEmail").value,
-        customer_phone: document.getElementById("customerPhone").value,
-        customer_address: document.getElementById("customerAddress").value,
-        delivery_time: document.getElementById("deliveryTime").value
-      };
+      function renderCart() {
+        let total = 0;
+        cartList.innerHTML = "";
 
-      emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", templateParams)
-        .then(() => {
-          const confirmation = document.createElement("div");
-confirmation.className = "alert alert-success mt-4 animate__animated animate__fadeInDown";
-confirmation.textContent = "Děkujeme za objednávku! Brzy se vám ozveme.";
-document.querySelector(".container").appendChild(confirmation);
-          confirmation.style.backgroundColor = '#f1491c';
-          confirmation.style.color = '#fff';
-          confirmation.style.border = 'none';
-          confirmation.style.fontWeight = 'bold';
-          confirmation.style.textAlign = 'center';
-          confirmation.style.fontSize = '1.2rem';
-          confirmation.style.borderRadius = '10px';
-          setTimeout(() => {
-  confirmation.classList.remove("animate__fadeInDown");
-  confirmation.classList.add("animate__fadeOutUp");
-  setTimeout(() => confirmation.remove(), 1000);
-}, 5000);
-
-localStorage.removeItem("cart");
-document.getElementById("cartOrderForm").reset();
-cartList.innerHTML = "";
-cartTotal.textContent = "0";
-        }, (error) => {
-          alert("Chyba při odesílání: " + error.text);
+        cartItems.forEach((item) => {
+          const price = parseInt(item.price.replace(/\D/g, ""));
+          total += price;
         });
-    });
+
+        cartTotal.textContent = total;
+      }
+
+      function populateDeliveryTimes() {
+        const select = document.getElementById("deliveryTime");
+        for (let hour = 10; hour < 22; hour++) {
+          const from = hour.toString().padStart(2, '0') + ":00";
+          const to = hour.toString().padStart(2, '0') + ":30";
+          const option = document.createElement("option");
+          option.value = `${from}-${to}`;
+          option.textContent = `${from} - ${to}`;
+          select.appendChild(option);
+        }
+      }
+
+      populateDeliveryTimes();
+      renderCart();
+
+      document.getElementById("cartOrderForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+        alert("Objednávka odeslána! (připojte emailjs dle потреби)");
+        localStorage.removeItem("cart");
+        document.getElementById("cartOrderForm").reset();
+        cartTotal.textContent = "0";
+      });
+    }
   </script>
-  <div class="black-jamun position-absolute" style="z-index: 0; opacity: 0.4; width: 100px; top: 10%; left: 2%;">
-    <img src="images/black-jamun.png" alt="black-jamun">
-  </div>
-  <div class="onion-img position-absolute" style="z-index: 0; opacity: 0.4; width: 100px; top: 50%; left: 8%;">
-    <img src="images/onion.png" alt="onion">
-  </div>
-  <div class="tamato-img position-absolute" style="z-index: 0; opacity: 0.4; width: 100px; bottom: 20%; right: 10%;">
-    <img src="images/tamato.png" alt="tamato">
-  </div>
-  <div class="leaf-img position-absolute" style="z-index: 0; opacity: 0.4; width: 100px; top: 15%; right: 5%;">
-    <img src="images/banner-leaf.png" alt="banner-leaf">
-  </div>
 </body>
 </html>

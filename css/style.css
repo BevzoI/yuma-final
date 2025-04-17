@@ -5192,6 +5192,7 @@ _______________________________________________________*/
 .sub-banner {
   padding-top: 300px;
   padding-bottom: 160px;
+  background-color: #fffaed;
 }
 
 .sub-banner .black-jamun {
@@ -5219,6 +5220,11 @@ _______________________________________________________*/
 
 .sub-banner-title {
   margin-bottom: 15px;
+  color: #f1491c;
+}
+
+.sub-banner-title2 {
+  color: #111111;
 }
 
 .sub-banner-content {

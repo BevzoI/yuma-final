@@ -271,11 +271,12 @@
                     </p>
                   </div>
                   <div class="menu-item-order">
-                    <a href="shop-detail.html" class="btn-ct btn-small"
-                      ><img src="images/cart-icon-white.png" alt="Cart Icon" />
-                      objednat</a
-                    >
+                    <button class="btn-ct btn-small add-to-cart" data-name="Cesar" data-price="260">
+                      <img src="images/cart-icon-white.png" alt="Cart Icon" />
+                      objednat
+                    </button>
                   </div>
+                  
                 </div>
               </div>
               <div class="menu-item-box rotate-img">
@@ -1823,6 +1824,7 @@ Gorgonzola
   });
 </script>
 
+
     
     <!-- Start Of Js -->
     <script src="js/jquery-3.4.1.min.js"></script>
@@ -1830,5 +1832,37 @@ Gorgonzola
     <script src="js/animation.js"></script>
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/pizzon.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const buttons = document.querySelectorAll(".add-to-cart");
+        const cartCount = document.querySelector(".cart-count");
+    
+        function updateCartCount() {
+          const cart = JSON.parse(localStorage.getItem("cart")) || [];
+          cartCount.textContent = cart.length;
+        }
+    
+        buttons.forEach(button => {
+          button.addEventListener("click", function (e) {
+            e.preventDefault();
+    
+            const name = this.dataset.name;
+            const price = this.dataset.price;
+            const item = { name, price };
+    
+            const cart = JSON.parse(localStorage.getItem("cart")) || [];
+            cart.push(item);
+            localStorage.setItem("cart", JSON.stringify(cart));
+    
+            updateCartCount();
+    
+            alert(`${name} byla přidána do košíku!`);
+          });
+        });
+    
+        updateCartCount(); // При завантаженні сторінки
+      });
+    </script>
+    
   </body>
 </html>
