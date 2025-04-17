@@ -1,257 +1,224 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<!-- Basic Page Needs -->
-	<title>YU-MA menu</title>
-	<meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YU-MA menu</title>
+  <link type="image/x-icon" href="./images/yuma/favicon.svg" rel="icon">
+  <link rel="stylesheet" href="css/font-awesome.min.css" />
+  <link rel="stylesheet" href="css/bootstrap.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    body { position: relative; overflow-x: hidden; }
+    #pizza-menu { background-color: transparent !important; }
+    .symbol { position: absolute; width: 40px; height: 40px; stroke: #111; stroke-width: 6; fill: none; opacity: 0; animation: fadeInOut 6s infinite ease-in-out; }
+    @keyframes fadeInOut { 0% { opacity: 0; } 25% { opacity: 0.3; } 50% { opacity: 0.5; } 75% { opacity: 0.3; } 100% { opacity: 0; } }
+    main, header, footer { position: relative; z-index: 1; }
 
-    <!-- CSS -->
-    <link type="image/x-icon" href="./images/yuma/favicon.svg" rel="icon">
-    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="css/style.css">
-	<style>
-     body {
-      position: relative;
-      overflow-x: hidden;
-    }
-	#pizza-menu {
-  background-color: transparent !important;
-}
-	#background-pattern {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  pointer-events: none;
-}
+    /* Випадаючі меню */
+	ul.dropdown-content {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #fff;
+    z-index: 99999;
+    display: none;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    min-width: 180px;
+  }
 
-    .symbol {
+  li:hover > ul.dropdown-content {
+    display: block;
+  }
+
+  .main-menu,
+  .menu,
+  .menu ul li {
+    position: relative;
+    overflow: visible;
+    z-index: 1001;
+  }
+
+  /* Забезпечення того, щоб фоновий шар був під усім */
+  #background-pattern {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  main, header, footer {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Стили для бургер-меню */
+  .menu-toggle {
+    display: none;
+    cursor: pointer;
+    flex-direction: column;
+    gap: 6px;
+    padding: 10px;
+  }
+
+  .menu-toggle span {
+    display: block;
+    height: 3px;
+    width: 25px;
+    background: #111;
+  }
+
+  @media (max-width: 991.98px) {
+    .menu {
+      display: none;
       position: absolute;
-      width: 40px;
-      height: 40px;
-      stroke: #111;
-      stroke-width: 6;
-      fill: none;
-      opacity: 0;
-      animation: fadeInOut 6s infinite ease-in-out;
-    }
-    @keyframes fadeInOut {
-      0% { opacity: 0; }
-      25% { opacity: 0.3; }
-      50% { opacity: 0.5; }
-      75% { opacity: 0.3; }
-      100% { opacity: 0; }
+      top: 100%;
+      right: 0;
+      background: white;
+      width: 100%;
+      z-index: 1002;
     }
 
-    main, header, footer {
+    .menu.active {
+      display: block;
+    }
+
+    .menu-toggle {
+      display: flex;
+    }
+
+    ul.dropdown-content {
       position: relative;
-      z-index: 1;
+      top: 0;
+      left: 0;
+      box-shadow: none;
+      z-index: 1003;
     }
 
-
-		.card {
-		  height: 100%;
-		  display: flex;
-		  flex-direction: column;
-		  justify-content: space-between;
-		  border-radius: 12px;
-		  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-		  overflow: hidden;
-		}
-		.card-img-top {
-		  object-fit: contain;
-		  height: 200px;
-		  background-color: #f8f8f8;
-		  padding: 1rem;
-		}
-		.card-body {
-		  display: flex;
-		  flex-direction: column;
-		  justify-content: space-between;
-		  flex-grow: 1;
-		  padding: 1rem;
-		}
-		.card-title {
-		  font-size: 1.25rem;
-		  font-weight: bold;
-		  margin-bottom: 0.5rem;
-		}
-		.card-text {
-		  flex-grow: 1;
-		  font-size: 0.95rem;
-		  margin-bottom: 0.75rem;
-		}
-		.fw-bold {
-		  font-size: 1.1rem;
-		  margin-bottom: 1rem;
-		  color: #f1491c !important;
-		}
-		.btn-outline-primary {
-		  border-color: #f1491c;
-		  color: #f1491c;
-		}
-		.btn-outline-primary:hover {
-		  background-color: #f1491c;
-		  color: white;
-		}
-		/* Mobile responsiveness */
-		@media (max-width: 767.98px) {
-      .card-img-top {
-        height: 160px;
-      }
-      .card-body {
-        padding: 0.75rem;
-      }
-      .card-title {
-        font-size: 1.1rem;
-      }
-      .card-text {
-        font-size: 0.9rem;
-      }
-      .fw-bold {
-        font-size: 1rem;
-      }
-      .btn {
-        font-size: 0.9rem;
-        padding: 0.5rem 1rem;
-      }
+    li:hover > ul.dropdown-content {
+      display: block;
     }
-	
-  @keyframes fadeInOut {
-    0% { opacity: 0; }
-    25% { opacity: 0.3; }
-    50% { opacity: 0.5; }
-    75% { opacity: 0.3; }
-    100% { opacity: 0; }
   }
-
-  .card-img-top {
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
-    background-color: transparent !important;
-  }
-
-  .card:hover .card-img-top {
-    transform: scale(1.05) rotate(1deg);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-  }
-	  </style>
+  </style>
 </head>
 <body>
-	<div id="background-pattern" style="position:absolute; top:0; left:0; width:100%; z-index:0; pointer-events:none;"></div>
+  <div id="background-pattern" style="position:absolute; top:0; left:0; width:100%; height:100%; z-index:0; pointer-events:none;"></div>
 
-	<!-- Preloader Start -->
-	<div id="preloader" class="preloader">
-		<div class="preloader-box">
-			<img src="images/preloader.svg" alt="preloader">
-		</div>
-	</div>
-	<!-- Preloader End -->
+  <!-- Preloader -->
+  <div id="preloader" class="preloader">
+    <div class="preloader-box">
+      <img src="images/preloader.svg" alt="preloader" />
+    </div>
+  </div>
 
-	<!-- Header Start -->
+  <!-- Header -->
+
 	<header>
      
 		<div class="container-big">
-		  <div class="header-inner">
-			<div class="row align-items-center">
-			  <div class="col-xl-3 col-lg-3 col-md-3 col-5">
-				<div class="header-logo">
-				  <a href="index.html"
-					><img src="./images/yuma/logo.svg" alt="Brand Logo"
-				  /></a>
+			<div class="header-inner">
+			  <div class="row align-items-center">
+				<div class="col-xl-3 col-lg-3 col-md-3 col-5">
+				  <div class="header-logo">
+					<a href="index.html"
+					  ><img src="./images/yuma/logo.svg" alt="Brand Logo"
+					/></a>
+				  </div>
 				</div>
-			  </div>
-			  <div class="col-xl-9 col-lg-9 col-md-9 col-7">
-				<div class="main-menu">
-				  <div class="menu-toggle">
-					<span></span>
-				  </div>
-				  <div class="menu">
-					<div class="sidemenu-header">
-					  <div class="sidemenu-logo">
-						<img src="./images/yuma/logo.svg" alt="Brand Logo" />
-					  </div>
-					  <div class="sidemenu-close">
-						<span></span>
-					  </div>
+				<div class="col-xl-9 col-lg-9 col-md-9 col-7">
+				  <div class="main-menu">
+					<div class="menu-toggle">
+					  <span></span>
 					</div>
-					<ul>
-					  <li ><a href="index.html">Domů</a></li>
-					  <li>
-						<span class="opener"></span>
-						<a class="active" href="javascript:void(0)">Menu</a>
-						<ul class="dropdown-content">
-						  <li><a href="shop-list.html">Pizza</a></li>
-						  <li><a href="shop-detail.html">Sushi</a></li>
-						  <li><a href="cart.html">Nápoje</a></li>
-						  <li><a href="checkout.html">Něco navíc</a></li>
-						</ul>
-					  </li>
-					  <li>
-						<span class="opener"></span>
-						<a href="javascript:void(0)">Novinky</a>
-						<ul class="dropdown-content">
-						  <li><a href="about.html">Nové pizzy v nabídce</a></li>
-						  <li><a href="our-menu.html">Akční nabídky a slevy</a></li>
-						  <li><a href="our-team.html">Ze zákulisí pece</a></li>
-						  <li><a href="book-now.html">Pizza měsíce</a></li>
-						  <li><a href="404.html">Řekli jste o nás</a></li>
-						</ul>
-					  </li>
-					  <li>
-						<span class="opener"></span>
-						<a href="javascript:void(0)">O nás</a>
-						<ul class="dropdown-content">
-						  <li><a href="blog-right.html">Naše příběh</a></li>
-						  <li><a href="blog-left.html">Náš tým</a></li>
-						  <li><a href="blog-detail.html">Naše hodnoty</a></li>
-						</ul>
-					  </li>
-					  <li><a href="contact-us.html">Kontakt</a></li>
-					</ul>
-				  </div>
-				  <div class="icon-menu">
-					<ul>
-					  <li class="search">
-						<a href="javascript:void(0)">
-						  <img
-							src="images/search-icon.png"
-							class="normal-icon"
-							alt="Search Icon"
-						  />
-						  <img
-							src="images/search-icon-2.png"
-							class="hover-icon"
-							alt="Search Icon"
-						  />
-						</a>
-					  </li>
-					  <li class="cart-slide position-r">
-						 <a href="cart.html">
-						  <img
-							src="images/cart-icon.png"
-							class="normal-icon"
-							alt="Cart Icon"
-						  />
-						  <img
-							src="images/cart-icon-2.png"
-							class="hover-icon"
-							alt="Cart Icon"
-						  />
-						  <span class="cart-count">0</span>
-						</a>
-					  </li>
-					</ul>
+					<div class="menu">
+					  <div class="sidemenu-header">
+						<div class="sidemenu-logo">
+						  <img src="./images/yuma/logo.svg" alt="Brand Logo" />
+						</div>
+						<div class="sidemenu-close">
+						  <span></span>
+						</div>
+					  </div>
+					  <ul>
+						<li ><a href="index.html">Domů</a></li>
+						<li>
+						  <span class="opener"></span>
+						  <a class="active" href="javascript:void(0)">Menu</a>
+						  <ul class="dropdown-content">
+							<li><a href="shop-list.html">Pizza</a></li>
+							<li><a href=sushi.html>Sushi</a></li>
+							<li><a href="napoje.html">Nápoje</a></li>
+							<li><a href="neco-navic.html">Něco navíc</a></li>
+						  </ul>
+						</li>
+						<li>
+						  <span class="opener"></span>
+						  <a href="javascript:void(0)">Novinky</a>
+						  <ul class="dropdown-content">
+							  <li><a href="novinky.html">Nové pizzy v nabídce</a></li>
+							  <li><a href="akce.html">Akční nabídky a slevy</a></li>
+							  <li><a href="our-team.html">Ze zákulisí pece</a></li>
+							  <li><a href="pizza-mesice.html">Pizza měsíce</a></li>
+							  <li><a href="hodnocení.html">Řekli jste o nás</a></li>
+						  </ul>
+						</li>
+						<li>
+						  <span class="opener"></span>
+						  <a href="javascript:void(0)">O nás</a>
+						  <ul class="dropdown-content">
+							<li><a href="blog-right.html">Naše příběh</a></li>
+							<li><a href="blog-left.html">Náš tým</a></li>
+							<li><a href="blog-detail.html">Naše hodnoty</a></li>
+						  </ul>
+						</li>
+						<li><a href="contact-us.html">Kontakt</a></li>
+					  </ul>
+					</div>
+					<div class="icon-menu">
+					  <ul>
+						<li class="search">
+						  <a href="javascript:void(0)">
+							<img
+							  src="images/search-icon.png"
+							  class="normal-icon"
+							  alt="Search Icon"
+							/>
+							<img
+							  src="images/search-icon-2.png"
+							  class="hover-icon"
+							  alt="Search Icon"
+							/>
+						  </a>
+						</li>
+						<li class="cart-slide position-r">
+						   <a href="cart.html">
+							<img
+							  src="images/cart-icon.png"
+							  class="normal-icon"
+							  alt="Cart Icon"
+							/>
+							<img
+							  src="images/cart-icon-2.png"
+							  class="hover-icon"
+							  alt="Cart Icon"
+							/>
+							<span class="cart-count">0</span>
+						  </a>
+						</li>
+					  </ul>
+					</div>
 				  </div>
 				</div>
 			  </div>
 			</div>
 		  </div>
-		</div>
-	  </header>
+		</header>
 	<!-- Header End -->
 
 
@@ -648,7 +615,16 @@ let cart = JSON.parse(localStorage.getItem("cart")) || [];
 		  100% { opacity: 0; }
 		}
 	  </style>
-	  
+<script>
+	document.addEventListener('DOMContentLoaded', function () {
+	  const menuToggle = document.querySelector('.menu-toggle');
+	  const menu = document.querySelector('.menu');
+  
+	  menuToggle.addEventListener('click', function () {
+		menu.classList.toggle('active');
+	  });
+	});
+  </script>
 	  
 </body>
 </html>

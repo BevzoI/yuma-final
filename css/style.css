@@ -4928,6 +4928,14 @@ _______________________________________________________*/
   margin-bottom: 20px;
 }
 
+.client-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+
 .client-name {
   font-size: 20px;
   font-weight: 600;
