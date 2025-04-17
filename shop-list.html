@@ -11,8 +11,119 @@
     <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<style>
+     body {
+      position: relative;
+      overflow-x: hidden;
+    }
+	#pizza-menu {
+  background-color: transparent !important;
+}
+	#background-pattern {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+    .symbol {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      stroke: #111;
+      stroke-width: 6;
+      fill: none;
+      opacity: 0;
+      animation: fadeInOut 6s infinite ease-in-out;
+    }
+    @keyframes fadeInOut {
+      0% { opacity: 0; }
+      25% { opacity: 0.3; }
+      50% { opacity: 0.5; }
+      75% { opacity: 0.3; }
+      100% { opacity: 0; }
+    }
+
+    main, header, footer {
+      position: relative;
+      z-index: 1;
+    }
+
+
+		.card {
+		  height: 100%;
+		  display: flex;
+		  flex-direction: column;
+		  justify-content: space-between;
+		  border-radius: 12px;
+		  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+		  overflow: hidden;
+		}
+		.card-img-top {
+		  object-fit: contain;
+		  height: 200px;
+		  background-color: #f8f8f8;
+		  padding: 1rem;
+		}
+		.card-body {
+		  display: flex;
+		  flex-direction: column;
+		  justify-content: space-between;
+		  flex-grow: 1;
+		  padding: 1rem;
+		}
+		.card-title {
+		  font-size: 1.25rem;
+		  font-weight: bold;
+		  margin-bottom: 0.5rem;
+		}
+		.card-text {
+		  flex-grow: 1;
+		  font-size: 0.95rem;
+		  margin-bottom: 0.75rem;
+		}
+		.fw-bold {
+		  font-size: 1.1rem;
+		  margin-bottom: 1rem;
+		  color: #f1491c !important;
+		}
+		.btn-outline-primary {
+		  border-color: #f1491c;
+		  color: #f1491c;
+		}
+		.btn-outline-primary:hover {
+		  background-color: #f1491c;
+		  color: white;
+		}
+		/* Mobile responsiveness */
+		@media (max-width: 767.98px) {
+      .card-img-top {
+        height: 160px;
+      }
+      .card-body {
+        padding: 0.75rem;
+      }
+      .card-title {
+        font-size: 1.1rem;
+      }
+      .card-text {
+        font-size: 0.9rem;
+      }
+      .fw-bold {
+        font-size: 1rem;
+      }
+      .btn {
+        font-size: 0.9rem;
+        padding: 0.5rem 1rem;
+      }
+    }
+	  </style>
 </head>
 <body>
+	<div id="background-pattern" style="position:absolute; top:0; left:0; width:100%; z-index:0; pointer-events:none;"></div>
 
 	<!-- Preloader Start -->
 	<div id="preloader" class="preloader">
@@ -172,9 +283,7 @@
 <!-- Start Pizza Menu Section -->
 <section class="section-padding bg-light" id="pizza-menu">
 	<style>
-	  .card-body .fw-bold {
-		color: #f1491c !important;
-	  }
+	  .card-body .fw-bold { color: #f1491c !important; }
 	  .card-body .btn-outline-primary {
 		border-color: #f1491c;
 		color: #f1491c;
@@ -191,8 +300,7 @@
 	  </div>
 	  <div id="menu-sections"></div>
 	</div>
-  
-	<!-- Cart Modal -->
+
 	<div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
 	  <div class="modal-dialog">
 		<div class="modal-content">
@@ -218,11 +326,10 @@
 	  </div>
 	</div>
   </section>
-  <!-- End Pizza Menu Section -->
-  
+
   <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
   <script>
-	emailjs.init("YOUR_PUBLIC_KEY"); // TODO: Replace with your EmailJS public key
+	emailjs.init("YOUR_PUBLIC_KEY");
   
 	const pizzaCategories = [
 	{
@@ -267,90 +374,88 @@
 	}
 ];
 
-  const menuSections = document.getElementById("menu-sections");
-  const cartCount = document.getElementById("cart-count");
-  const cartItemsList = document.getElementById("cart-items");
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const cartCountEl = document.querySelector(".cart-count");
+      const menuSections = document.getElementById("menu-sections");
+      const cartItemsList = document.getElementById("cart-items");
 
-  pizzaCategories.forEach((section) => {
-    const sectionDiv = document.createElement("div");
-    sectionDiv.className = "mb-5";
-    sectionDiv.innerHTML = `<h3 class="mb-4 text-center">${section.title}</h3><div class="row"></div>`;
-    const row = sectionDiv.querySelector(".row");
+      pizzaCategories.forEach((section) => {
+        const sectionDiv = document.createElement("div");
+        sectionDiv.className = "mb-5";
+        sectionDiv.innerHTML = `<h3 class="mb-4 text-center">${section.title}</h3><div class="row"></div>`;
+        const row = sectionDiv.querySelector(".row");
 
-    section.items.forEach(pizza => {
-      const col = document.createElement("div");
-      col.className = "col-lg-4 col-md-6 mb-4";
-      col.innerHTML = `
-        <div class="card h-100">
-          <img src="${pizza.img}" class="card-img-top" alt="${pizza.name}" />
-          <div class="card-body">
-            <h5 class="card-title">${pizza.name}</h5>
-            <p class="card-text">${pizza.desc}</p>
-            <p class="fw-bold">${pizza.price}</p>
-            <button class="btn btn-outline-primary" onclick="addToCart('${pizza.name}', '${pizza.price}')">Přidat do košíku</button>
-          </div>
-        </div>
-      `;
-      row.appendChild(col);
-    });
+        section.items.forEach(pizza => {
+          const numericPrice = parseInt(pizza.price);
+          const col = document.createElement("div");
+          col.className = "col-lg-4 col-md-6 mb-4";
+          col.innerHTML = `
+            <div class="card h-100">
+              <img src="${pizza.img}" class="card-img-top" alt="${pizza.name}" />
+              <div class="card-body">
+                <h5 class="card-title">${pizza.name}</h5>
+                <p class="card-text">${pizza.desc}</p>
+                <p class="fw-bold">${numericPrice} Kč</p>
+                <button class="btn btn-outline-primary" onclick="addToCart('${pizza.name}', ${numericPrice})">Přidat do košíku</button>
+              </div>
+            </div>
+          `;
+          row.appendChild(col);
+        });
 
-    menuSections.appendChild(sectionDiv);
-  });
-
-  function addToCart(name, price) {
-  const cart = JSON.parse(localStorage.getItem("cart")) || [];
-  cart.push({ name, price });
-  localStorage.setItem("cart", JSON.stringify(cart));
-
-  // оновлення лічильника в хедері, якщо потрібно
-  const cartCount = document.querySelector(".cart-count");
-  if (cartCount) {
-    cartCount.textContent = cart.length;
-  }
-}
-
-  function updateCartList() {
-    cartItemsList.innerHTML = "";
-    cart.forEach((item, index) => {
-      const li = document.createElement("li");
-      li.className = "list-group-item d-flex justify-content-between align-items-center";
-      li.innerHTML = `${item.name} - ${item.price} <button class='btn btn-sm btn-danger' onclick='removeFromCart(${index})'>×</button>`;
-      cartItemsList.appendChild(li);
-    });
-  }
-
-  function removeFromCart(index) {
-    cart.splice(index, 1);
-    cartCount.textContent = cart.length;
-    updateCartList();
-  }
-
-  document.getElementById("cartOrderForm").addEventListener("submit", function (e) {
-    e.preventDefault();
-
-    const templateParams = {
-      order_list: cart.map(item => `${item.name} - ${item.price}`).join("\n"),
-      customer_name: document.getElementById("customerName").value,
-      customer_email: document.getElementById("customerEmail").value
-    };
-
-    emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", templateParams)
-      .then(() => {
-        alert("Objednávka byla úspěšně odeslána!");
-        cart.length = 0;
-        cartCount.textContent = "0";
-        updateCartList();
-        document.getElementById("cartOrderForm").reset();
-        const modal = bootstrap.Modal.getInstance(document.getElementById("cartModal"));
-        modal.hide();
-      }, (error) => {
-        alert("Chyba při odesílání: " + error.text);
+        menuSections.appendChild(sectionDiv);
       });
-  });
-</script>
 
-		
-	</main>
+      function addToCart(name, price) {
+        cart.push({ name, price, quantity: 1 });
+        localStorage.setItem("cart", JSON.stringify(cart));
+        if (cartCountEl) {
+          cartCountEl.textContent = cart.length;
+        }
+      }
+
+      function updateCartList() {
+        cartItemsList.innerHTML = "";
+        cart.forEach((item, index) => {
+          const li = document.createElement("li");
+          li.className = "list-group-item d-flex justify-content-between align-items-center";
+          li.innerHTML = `${item.name} - ${item.price} Kč <button class='btn btn-sm btn-danger' onclick='removeFromCart(${index})'>×</button>`;
+          cartItemsList.appendChild(li);
+        });
+      }
+
+      function removeFromCart(index) {
+        cart.splice(index, 1);
+        cartCountEl.textContent = cart.length;
+        updateCartList();
+        localStorage.setItem("cart", JSON.stringify(cart));
+      }
+
+      document.getElementById("cartOrderForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const templateParams = {
+          order_list: cart.map(item => `${item.name} - ${item.price} Kč`).join("\n"),
+          customer_name: document.getElementById("customerName").value,
+          customer_email: document.getElementById("customerEmail").value
+        };
+
+        emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", templateParams)
+          .then(() => {
+            alert("Objednávka byla úspěšně odeslána!");
+            cart = [];
+            localStorage.removeItem("cart");
+            cartCountEl.textContent = "0";
+            updateCartList();
+            document.getElementById("cartOrderForm").reset();
+            const modal = bootstrap.Modal.getInstance(document.getElementById("cartModal"));
+            modal.hide();
+          }, (error) => {
+            alert("Chyba při odesílání: " + error.text);
+          });
+      });
+    </script>
+  </main>
 	<!-- End Of Main Div -->
 
 
@@ -445,5 +550,87 @@
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/animation.js"></script>
 	<script src="js/pizzon.js"></script> 
+	<script>
+		const container = document.getElementById('background-pattern');
+		const symbols = ['X', 'O'];
+	  
+		function createSymbol(x, y, type, delay) {
+		  const svgNS = 'http://www.w3.org/2000/svg';
+		  const svg = document.createElementNS(svgNS, 'svg');
+		  svg.setAttribute('class', 'symbol');
+		  svg.setAttribute('viewBox', '0 0 40 40');
+		  svg.style.position = 'absolute';
+		  svg.style.left = `${x}px`;
+		  svg.style.top = `${y}px`;
+		  svg.style.animation = `fadeInOut 6s ${delay}s infinite ease-in-out`;
+		  svg.style.opacity = 0;
+		  svg.style.width = '40px';
+		  svg.style.height = '40px';
+	  
+		  if (type === 'X') {
+			const line1 = document.createElementNS(svgNS, 'line');
+			line1.setAttribute('x1', '5');
+			line1.setAttribute('y1', '5');
+			line1.setAttribute('x2', '35');
+			line1.setAttribute('y2', '35');
+			line1.setAttribute('stroke', '#111');
+			line1.setAttribute('stroke-width', '6');
+	  
+			const line2 = document.createElementNS(svgNS, 'line');
+			line2.setAttribute('x1', '35');
+			line2.setAttribute('y1', '5');
+			line2.setAttribute('x2', '5');
+			line2.setAttribute('y2', '35');
+			line2.setAttribute('stroke', '#111');
+			line2.setAttribute('stroke-width', '6');
+	  
+			svg.appendChild(line1);
+			svg.appendChild(line2);
+		  } else {
+			const circle = document.createElementNS(svgNS, 'circle');
+			circle.setAttribute('cx', '20');
+			circle.setAttribute('cy', '20');
+			circle.setAttribute('r', '15');
+			circle.setAttribute('stroke', '#111');
+			circle.setAttribute('stroke-width', '6');
+			circle.setAttribute('fill', 'none');
+			svg.appendChild(circle);
+		  }
+	  
+		  container.appendChild(svg);
+		}
+	  
+		function fillScreenWithSymbols() {
+		  const width = window.innerWidth;
+		  const height = document.body.scrollHeight;
+	  
+		  container.innerHTML = '';
+		  container.style.width = `${width}px`;
+		  container.style.height = `${height}px`;
+	  
+		  for (let i = 0; i < 80; i++) {
+			const x = Math.random() * width;
+			const y = Math.random() * height;
+			const type = symbols[Math.floor(Math.random() * symbols.length)];
+			const delay = Math.random() * 6;
+			createSymbol(x, y, type, delay);
+		  }
+		}
+	  
+		fillScreenWithSymbols();
+		window.addEventListener('resize', fillScreenWithSymbols);
+	  </script>
+	  
+	  <style>
+		@keyframes fadeInOut {
+		  0% { opacity: 0; }
+		  25% { opacity: 0.3; }
+		  50% { opacity: 0.5; }
+		  75% { opacity: 0.3; }
+		  100% { opacity: 0; }
+		}
+	  </style>
+	  
+	  
 </body>
 </html>

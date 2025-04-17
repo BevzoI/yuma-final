@@ -28,7 +28,7 @@
       max-width: 500px;
       width: 100%;
       background-color: #fff;
-      padding: 3rem 3rem 3rem 3rem; /* top right bottom left */
+      padding: 3rem;
       border-radius: 20px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.1);
       z-index: 2;
@@ -39,7 +39,7 @@
       font-weight: bold;
       text-align: center;
       text-transform: uppercase;
-      margin-bottom: 0.5rem;
+      margin-bottom: 1rem;
     }
 
     .form-field {
@@ -77,6 +77,27 @@
       width: 100%;
     }
 
+    .qty-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 2px solid #f1491c;
+      background-color: #f1491c;
+      color: #fff;
+      font-weight: bold;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .qty-btn:hover {
+      background-color: #fff;
+      color: #f1491c;
+    }
+
     .floating-img {
       position: absolute;
       z-index: 0;
@@ -92,6 +113,20 @@
       75% { transform: translate(5px, -5px); }
       100% { transform: translate(0, 0); }
     }
+
+    #cart-items li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    #cart-items {
+      margin-bottom: 2rem;
+      padding: 0;
+      list-style: none;
+    }
   </style>
 </head>
 <body onload="initPage()">
@@ -99,8 +134,10 @@
   <div class="main-wrapper">
     <div class="form-box animate__animated animate__fadeIn">
       <h1>Váš košík</h1>
-      <p style="text-align: center; margin-bottom: 2rem;">Celkem: <span id="cart-total">0</span> Kč</p>
-
+      <ul id="cart-items"></ul>
+      <p style="text-align: center; margin-bottom: 2rem;">
+        Celkem: <strong><span id="cart-total">0</span> Kč</strong>
+      </p>
       <form id="cartOrderForm" novalidate>
         <div>
           <label for="customerName" class="form-label">Vaše jméno</label>
@@ -127,7 +164,6 @@
     </div>
   </div>
 
-  <!-- Плаваючі картинки -->
   <script>
     const imagePaths = [
       "images/yuma/cesar-removebg-preview (1).png",
@@ -163,21 +199,62 @@
     function initPage() {
       createFloatingImages();
 
-      const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+      let cartItems = JSON.parse(localStorage.getItem("cart")) || [];
       const cartList = document.getElementById("cart-items");
       const cartTotal = document.getElementById("cart-total");
 
-      function renderCart() {
-        let total = 0;
-        cartList.innerHTML = "";
+      function saveCart() {
+        localStorage.setItem("cart", JSON.stringify(cartItems));
+      }
 
-        cartItems.forEach((item) => {
-          const price = parseInt(item.price.replace(/\D/g, ""));
-          total += price;
-        });
-
+      function updateTotal() {
+        const total = cartItems.reduce((sum, item) => {
+          return sum + parseInt(item.price) * item.quantity;
+        }, 0);
         cartTotal.textContent = total;
       }
+
+      function renderCart() {
+        cartList.innerHTML = "";
+
+        if (cartItems.length === 0) {
+          cartList.innerHTML = "<li style='text-align:center; color:gray;'>Košík je prázdný.</li>";
+          cartTotal.textContent = "0";
+          return;
+        }
+
+        cartItems.forEach((item, index) => {
+          const li = document.createElement("li");
+          li.innerHTML = `
+            <span>${item.name}</span>
+            <div style="display:flex; gap:0.5rem; align-items:center;">
+              <button onclick="changeQuantity(${index}, -1)" class="qty-btn">−</button>
+              <span>${item.quantity}</span>
+              <button onclick="changeQuantity(${index}, 1)" class="qty-btn">+</button>
+              <strong style="min-width: 60px; text-align: right;">${item.price * item.quantity} Kč</strong>
+              <button onclick="removeItem(${index})" style="color: red; background: none; border: none; font-weight: bold; padding: 0 10px;">×</button>
+            </div>
+          `;
+          cartList.appendChild(li);
+        });
+
+        updateTotal();
+      }
+
+      window.removeItem = function(index) {
+        cartItems.splice(index, 1);
+        saveCart();
+        renderCart();
+      };
+
+      window.changeQuantity = function(index, change) {
+        cartItems[index].quantity += change;
+        if (cartItems[index].quantity <= 0) {
+          cartItems.splice(index, 1);
+        }
+        saveCart();
+        renderCart();
+      };
 
       function populateDeliveryTimes() {
         const select = document.getElementById("deliveryTime");
@@ -191,15 +268,22 @@
         }
       }
 
+      cartItems = cartItems.map(item => ({
+        ...item,
+        quantity: item.quantity || 1
+      }));
+      saveCart();
+
       populateDeliveryTimes();
       renderCart();
 
       document.getElementById("cartOrderForm").addEventListener("submit", function (e) {
         e.preventDefault();
-        alert("Objednávka odeslána! (připojte emailjs dle потреби)");
+        alert("Objednávka odeslána!");
         localStorage.removeItem("cart");
-        document.getElementById("cartOrderForm").reset();
-        cartTotal.textContent = "0";
+        this.reset();
+        cartItems = [];
+        renderCart();
       });
     }
   </script>
