@@ -1,82 +1,78 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Váš košík</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Objednávka pizzy</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-  <link type="image/x-icon" href="./images/yuma/favicon.svg" rel="icon" />
+  <link type="image/x-icon" href="./images/yuma/favicon.svg" rel="icon">
   <style>
     body {
-      margin: 0;
-      background-color: #fffaf0;
       font-family: Arial, sans-serif;
-      overflow: hidden;
+      background-color: #fffaf0;
+      margin: 0;
       position: relative;
-    }
-
-    .main-wrapper {
-      display: flex;
-      justify-content: center;
-      align-items: center;
       min-height: 100vh;
-      position: relative;
-      z-index: 2;
+      overflow-x: hidden;
     }
-
+    html {
+      scroll-behavior: smooth;
+    }
     .form-box {
-      max-width: 500px;
-      width: 100%;
-      background-color: #fff;
-      padding: 3rem;
+      max-width: 600px;
+      margin: 3rem auto;
+      background: #fff;
+      padding: 2rem;
       border-radius: 20px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      position: relative;
       z-index: 2;
     }
-
     h1 {
-      color: #f1491c;
-      font-weight: bold;
       text-align: center;
-      text-transform: uppercase;
-      margin-bottom: 1rem;
+      color: #f1491c;
     }
-
-    .form-field {
-      border-radius: 8px;
-      border: 1px solid #f1491c;
-      font-size: 1.05rem;
-      padding: 0.6rem 1rem;
-      width: 100%;
-      box-sizing: border-box;
-    }
-
-    .form-label {
+    label {
+      display: block;
       margin-bottom: 0.25rem;
       font-weight: bold;
-      display: block;
     }
-
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 1.75rem;
+    input, select {
+      width: 100%;
+      padding: 0.75rem;
+      margin-bottom: 1.5rem;
+      border-radius: 8px;
+      border: 1px solid #f1491c;
+      font-size: 1rem;
+      box-sizing: border-box;
     }
-
+    select {
+      appearance: none;
+    }
     .btn {
-      background-color: #f1491c;
-      border: none;
+      background: #f1491c;
       color: white;
-      padding: 0.85rem 1.25rem;
+      padding: 1rem;
+      border: none;
       border-radius: 12px;
-      font-size: 1.1rem;
       font-weight: bold;
       cursor: pointer;
       text-transform: uppercase;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
       width: 100%;
     }
-
+    ul#cart-items {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 2rem;
+    }
+    ul#cart-items li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
     .qty-btn {
       width: 32px;
       height: 32px;
@@ -92,12 +88,10 @@
       align-items: center;
       justify-content: center;
     }
-
     .qty-btn:hover {
       background-color: #fff;
       color: #f1491c;
     }
-
     .floating-img {
       position: absolute;
       z-index: 0;
@@ -105,7 +99,6 @@
       width: 80px;
       animation: floatAround infinite ease-in-out;
     }
-
     @keyframes floatAround {
       0% { transform: translate(0, 0); }
       25% { transform: translate(10px, -10px); }
@@ -113,57 +106,39 @@
       75% { transform: translate(5px, -5px); }
       100% { transform: translate(0, 0); }
     }
-
-    #cart-items li {
-      padding: 0.5rem 0;
-      border-bottom: 1px solid #eee;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    #cart-items {
-      margin-bottom: 2rem;
-      padding: 0;
-      list-style: none;
-    }
   </style>
 </head>
 <body onload="initPage()">
+  <div class="form-box animate__animated animate__fadeIn">
+    <h1>Objednávka pizzy</h1>
+    <ul id="cart-items"></ul>
+    <p style="text-align: center; margin-bottom: 2rem;">
+      Celkem: <strong><span id="cart-total">0</span> Kč</strong>
+    </p>
+    <form id="cartOrderForm">
+      <label for="customerName">Vaše jméno</label>
+      <input type="text" id="customerName" name="customer_name" required />
 
-  <div class="main-wrapper">
-    <div class="form-box animate__animated animate__fadeIn">
-      <h1>Váš košík</h1>
-      <ul id="cart-items"></ul>
-      <p style="text-align: center; margin-bottom: 2rem;">
-        Celkem: <strong><span id="cart-total">0</span> Kč</strong>
-      </p>
-      <form id="cartOrderForm" novalidate>
-        <div>
-          <label for="customerName" class="form-label">Vaše jméno</label>
-          <input type="text" id="customerName" name="customer_name" class="form-field" required />
-        </div>
-        <div>
-          <label for="customerEmail" class="form-label">Váš e-mail</label>
-          <input type="email" id="customerEmail" name="customer_email" class="form-field" required />
-        </div>
-        <div>
-          <label for="customerPhone" class="form-label">Telefon</label>
-          <input type="tel" id="customerPhone" name="customer_phone" class="form-field" required />
-        </div>
-        <div>
-          <label for="customerAddress" class="form-label">Adresa</label>
-          <input type="text" id="customerAddress" name="customer_address" class="form-field" required />
-        </div>
-        <div>
-          <label for="deliveryTime" class="form-label">Čas doručení</label>
-          <select id="deliveryTime" name="delivery_time" class="form-field" required></select>
-        </div>
-        <button type="submit" class="btn">Odeslat objednávku</button>
-      </form>
-    </div>
+      <label for="customerEmail">Váš e-mail</label>
+      <input type="email" id="customerEmail" name="customer_email" required />
+
+      <label for="customerPhone">Telefon</label>
+      <input type="tel" id="customerPhone" name="customer_phone" required />
+
+      <label for="customerAddress">Adresa</label>
+      <input type="text" id="customerAddress" name="customer_address" required />
+
+      <label for="deliveryTime">Čas doručení</label>
+      <select id="deliveryTime" name="delivery_time" required></select>
+
+      <input type="hidden" name="cart_items" id="cartItemsField" />
+      <input type="hidden" name="cart_total" id="cartTotalField" />
+
+      <button type="submit" class="btn">Odeslat objednávku</button>
+    </form>
   </div>
 
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
   <script>
     const imagePaths = [
       "images/yuma/cesar-removebg-preview (1).png",
@@ -176,29 +151,28 @@
       for (let i = 0; i < count; i++) {
         const img = document.createElement("div");
         img.classList.add("floating-img");
-
         const inner = document.createElement("img");
         inner.src = imagePaths[Math.floor(Math.random() * imagePaths.length)];
         inner.alt = "decor";
         inner.style.width = "100%";
-
         img.appendChild(inner);
-
         const randomX = Math.random() * (window.innerWidth - 100);
         const randomY = Math.random() * (window.innerHeight - 100);
         const randomDuration = 8 + Math.random() * 8;
-
         img.style.left = `${randomX}px`;
         img.style.top = `${randomY}px`;
         img.style.animationDuration = `${randomDuration}s`;
-
         document.body.appendChild(img);
       }
     }
 
+    function generateCartText(cartItems) {
+      if (!cartItems || cartItems.length === 0) return "Košík je prázdný.";
+      return cartItems.map(item => `• ${item.name} – ${item.quantity} ks – ${item.price * item.quantity} Kč`).join("\n");
+    }
+
     function initPage() {
       createFloatingImages();
-
       let cartItems = JSON.parse(localStorage.getItem("cart")) || [];
       const cartList = document.getElementById("cart-items");
       const cartTotal = document.getElementById("cart-total");
@@ -208,15 +182,12 @@
       }
 
       function updateTotal() {
-        const total = cartItems.reduce((sum, item) => {
-          return sum + parseInt(item.price) * item.quantity;
-        }, 0);
+        const total = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
         cartTotal.textContent = total;
       }
 
       function renderCart() {
         cartList.innerHTML = "";
-
         if (cartItems.length === 0) {
           cartList.innerHTML = "<li style='text-align:center; color:gray;'>Košík je prázdný.</li>";
           cartTotal.textContent = "0";
@@ -237,7 +208,6 @@
           `;
           cartList.appendChild(li);
         });
-
         updateTotal();
       }
 
@@ -268,24 +238,42 @@
         }
       }
 
-      cartItems = cartItems.map(item => ({
-        ...item,
-        quantity: item.quantity || 1
-      }));
+      cartItems = cartItems.map(item => ({ ...item, quantity: item.quantity || 1 }));
       saveCart();
-
       populateDeliveryTimes();
       renderCart();
 
       document.getElementById("cartOrderForm").addEventListener("submit", function (e) {
         e.preventDefault();
-        alert("Objednávka odeslána!");
+        document.getElementById("cartItemsField").value = generateCartText(cartItems);
+        document.getElementById("cartTotalField").value = document.getElementById("cart-total").textContent.trim();
+
+        emailjs.sendForm("service_wng239p", "template_bxnvoh8", this)
+          .then(() => {
+            alert("Objednávka byla úspěšně odeslána!");
+          });
+
+        const formData = {
+          customer_name: document.getElementById("customerName").value,
+          customer_email: document.getElementById("customerEmail").value,
+          customer_phone: document.getElementById("customerPhone").value,
+          customer_address: document.getElementById("customerAddress").value,
+          delivery_time: document.getElementById("deliveryTime").value,
+          cart_items: document.getElementById("cartItemsField").value,
+          cart_total: document.getElementById("cartTotalField").value
+        };
+
+        emailjs.send("service_wng239p", "template_owner_notification", formData);
+
         localStorage.removeItem("cart");
         this.reset();
         cartItems = [];
         renderCart();
       });
     }
+    (function () {
+      emailjs.init("RDC_c3eh1LPepEWO_");
+    })();
   </script>
 </body>
 </html>

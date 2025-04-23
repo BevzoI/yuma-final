@@ -1,449 +1,374 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="cs">
 <head>
-	<!-- Basic Page Needs -->
-	<title>YU-MA menu</title>
-	<meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-    <!-- CSS -->
-    <link type="image/x-icon" href="./images/yuma/favicon.svg" rel="icon">
-    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YU-MA Nápoje</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/font-awesome.min.css" />
+  <style>
+    .card-img-top {
+      height: 240px;
+      object-fit: contain;
+      background-color: #fff5e6;
+      padding: 10px;
+    }
+  </style>
 </head>
 <body>
+  <!-- Прелоадер -->
+  <div id="preloader" class="preloader">
+    <div class="preloader-box">
+      <img src="images/preloader.svg" alt="preloader" />
+    </div>
+  </div>
 
-	<!-- Preloader Start -->
-	<div id="preloader" class="preloader">
-		<div class="preloader-box">
-			<img src="images/preloader.svg" alt="preloader">
-		</div>
-	</div>
-	<!-- Preloader End -->
-
-	<!-- Header Start -->
-	<header>
-     
-		<div class="container-big">
-		  <div class="header-inner">
-			<div class="row align-items-center">
-			  <div class="col-xl-3 col-lg-3 col-md-3 col-5">
-				<div class="header-logo">
-				  <a href="index.html"
-					><img src="./images/yuma/logo.svg" alt="Brand Logo"
-				  /></a>
-				</div>
-			  </div>
-			  <div class="col-xl-9 col-lg-9 col-md-9 col-7">
-				<div class="main-menu">
-				  <div class="menu-toggle">
-					<span></span>
-				  </div>
-				  <div class="menu">
-					<div class="sidemenu-header">
-					  <div class="sidemenu-logo">
-						<img src="./images/yuma/logo.svg" alt="Brand Logo" />
-					  </div>
-					  <div class="sidemenu-close">
-						<span></span>
-					  </div>
-					</div>
-					<ul>
-					  <li ><a href="index.html">Domů</a></li>
-					  <li>
-						<span class="opener"></span>
-						<a class="active" href="javascript:void(0)">Menu</a>
-						<ul class="dropdown-content">
-						  <li><a href="shop-list.html">Pizza</a></li>
-						  <li><a href=sushi.html>Sushi</a></li>
-						  <li><a href="napoje.html">Nápoje</a></li>
-						  <li><a href="neco-navic.html">Něco navíc</a></li>
-						</ul>
-					  </li>
-					  <li>
-						<span class="opener"></span>
-						<a href="javascript:void(0)">Novinky</a>
-						<ul class="dropdown-content">
-							<li><a href="novinky.html">Nové pizzy v nabídce</a></li>
-							<li><a href="akce.html">Akční nabídky a slevy</a></li>
-							<li><a href="our-team.html">Ze zákulisí pece</a></li>
-							<li><a href="pizza-mesice.html">Pizza měsíce</a></li>
-							<li><a href="hodnocení.html">Řekli jste o nás</a></li>
-						</ul>
-					  </li>
-					  <li>
-						<span class="opener"></span>
-						<a href="javascript:void(0)">O nás</a>
-						<ul class="dropdown-content">
-						  <li><a href="blog-right.html">Naše příběh</a></li>
-						  <li><a href="blog-left.html">Náš tým</a></li>
-						  <li><a href="blog-detail.html">Naše hodnoty</a></li>
-						</ul>
-					  </li>
-					  <li><a href="contact-us.html">Kontakt</a></li>
-					</ul>
-				  </div>
-				  <div class="icon-menu">
-					<ul>
-					  <li class="search">
-						<a href="javascript:void(0)">
-						  <img
-							src="images/search-icon.png"
-							class="normal-icon"
-							alt="Search Icon"
-						  />
-						  <img
-							src="images/search-icon-2.png"
-							class="hover-icon"
-							alt="Search Icon"
-						  />
-						</a>
-					  </li>
-					  <li class="cart-slide position-r">
-						 <a href="cart.html">
-						  <img
-							src="images/cart-icon.png"
-							class="normal-icon"
-							alt="Cart Icon"
-						  />
-						  <img
-							src="images/cart-icon-2.png"
-							class="hover-icon"
-							alt="Cart Icon"
-						  />
-						  <span class="cart-count">0</span>
-						</a>
-					  </li>
-					</ul>
-				  </div>
-				</div>
-			  </div>
-			</div>
-		  </div>
-		</div>
-	  </header>
-	<!-- Header End -->
-
-
-	<!-- Start Of Main Div -->
-	<main>
-
-		<!-- Start Of Sub Banner -->
-		<section class="sub-banner bg-yellow overflow-h position-r">
-			<div class="container">
-				<div class="row align-items-center">
-					<div class="col-xl-6 col-lg-6 col-md-12">
-						<div class="sub-banner-content wow fadeInLeft">
-							<h1 class="sub-banner-title">YU-MA <span class="sub-banner-title2">pizza</span></h1>
-							<p>“K dobré pizze patří i dobré pití – máme pro vás to nejlepší“</p>
-						</div>
-					</div>
-
-					<div class="col-xl-6 col-lg-6 col-md-12">
-						<div class="bread-crumb wow fadeInRight">
-							<ul>
-								<li><a href="index.html">Domů</a></li>
-								<li>Napoje</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="black-jamun wow fadeInLeft animation-delay-5">
-				<img src="./images/yuma/hra.png" alt="black-jamun">
-			</div>
-
-			<div class="onion-img wow fadeInUp animation-delay-6">
-				<img src="images/onion.png" alt="onion">
-			</div>
-
-			<div class="tamato-img wow fadeInUp animation-delay-7">
-				<img src="images/tamato.png" alt="tamato">
-			</div>
-
-			<div class="leaf-img wow fadeInRight animation-delay-8">
-				<img src="images/banner-leaf.png" alt="banner-leaf">
-			</div>
-		</section>
-		<!-- End Of Sub Banner -->
-
-<!-- Start Pizza Menu Section -->
-<section class="section-padding bg-light" id="pizza-menu">
-	<style>
-	  .card-body .fw-bold {
-		color: #f1491c !important;
-	  }
-	  .card-body .btn-outline-primary {
-		border-color: #f1491c;
-		color: #f1491c;
-	  }
-	  .card-body .btn-outline-primary:hover {
-		background-color: #f1491c;
-		color: white;
-	  }
-	</style>
-	<div class="container">
-	  <div class="section-title text-center">
-		<h2>Naše nabídka pizz</h2>
-		<p>Objednejte si svou oblíbenou pizzu online</p>
-	  </div>
-	  <div id="menu-sections"></div>
-	</div>
-  
-	<!-- Cart Modal -->
-	<div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
-	  <div class="modal-dialog">
-		<div class="modal-content">
-		  <div class="modal-header">
-			<h5 class="modal-title" id="cartModalLabel">Košík</h5>
-			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-		  </div>
-		  <div class="modal-body">
-			<ul id="cart-items" class="list-group mb-3"></ul>
-			<form id="cartOrderForm">
-			  <div class="mb-3">
-				<label for="customerName" class="form-label">Vaše jméno</label>
-				<input type="text" class="form-control" id="customerName" name="customer_name" required />
-			  </div>
-			  <div class="mb-3">
-				<label for="customerEmail" class="form-label">Váš e-mail</label>
-				<input type="email" class="form-control" id="customerEmail" name="customer_email" required />
-			  </div>
-			  <button type="submit" class="btn btn-primary">Odeslat objednávku</button>
-			</form>
-		  </div>
-		</div>
-	  </div>
-	</div>
-  </section>
-  <!-- End Pizza Menu Section -->
-  
-  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-  <script>
-	emailjs.init("YOUR_PUBLIC_KEY"); // TODO: Replace with your EmailJS public key
-  
-	const pizzaCategories = [
-	{
-	  title: "Klasická",
-	  items: [
-		{ name: "Prosciutto Cotto", price: "190 Kč", desc: "Omáčka Pronto, mozzarella, šunka, smetanovo-česneková omáčka, bazalka", img: "./images/yuma/Pizza_Prosciutto__hruška_a_gorgonzola-removebg-preview.png" },
-		{ name: "Carbonara", price: "220 Kč", desc: "Smetanový základ, mozzarella, pancetta, vejce, parmazán", img: "./images/yuma/Pizza_Carbonara-removebg-preview.png" },
-		{ name: "Pepperoni", price: "210 Kč", desc: "Omáčka Pronto, mozzarella, klobása Chorizo, paprika", img: "./images/yuma/Pizza_Pepperoni-removebg-preview.png" },
-		{ name: "Pepperoni s jalapeño", price: "220 Kč", desc: "Omáčka Pronto, mozzarella, klobása Chorizo, paprika, jalapeño", img: "./images/yuma/Pizza_pepperoni_s_jalapeňo-removebg-preview.png" },
-		{ name: "Capricciosa", price: "240 Kč", desc: "Omáčka Pronto, mozzarella, šunka, žampiony, olivy, artyčoky, cherry rajčata", img: "./images/yuma/Pizza_capricciosa-removebg-preview.png" }
-	  ]
-	},
-	{
-	  title: "Žádné maso",
-	  items: [
-		{ name: "Margherita", price: "180 Kč", desc: "Omáčka Pronto, mozzarella Buona Diate, bazalka", img: "./images/yuma/margarita-removebg-preview.png" },
-		{ name: "Quattro Formaggi", price: "240 Kč", desc: "Smetanový základ, mozzarella, cheddar, gorgonzola, parmazán, bazalka", img: "./images/yuma/Pizza_Quatro_Formaggi__4syry_-removebg-preview.png" }
-	  ]
-	},
-	{
-	  title: "Gurmánské",
-	  items: [
-		{ name: "Caesar", price: "260 Kč", desc: "Caesar základ, mozzarella, kuřecí maso, pancetta, římský salát, parmazán", img: "./images/yuma/cesar-removebg-preview (1).png" },
-		{ name: "Texas", price: "240 Kč", desc: "Omáčka Pronto, mozzarella, kuřecí filet, šunka, kukuřice, paprika, cibule, BBQ omáčka", img: "./images/yuma/Pizza_Texas-removebg-preview.png" },
-		{ name: "Prosciutto di Parma", price: "250 Kč", desc: "Smetanový základ, mozzarella, Prosciutto, hruška, gorgonzola", img: "./images/yuma/Pizza_Prosciutto__hruška_a_gorgonzola-removebg-preview.png" }
-	  ]
-	},
-	{
-	  title: "Mořské dary",
-	  items: [
-		{ name: "Tonno", price: "200 Kč", desc: "Smetanový základ, mozzarella, konzervovaný tuňák, omáčka pesto, pomeranč", img: "./images/yuma/Pizzastuňákemvkonzervě-removebg-preview.png" },
-		{ name: "Al tonno fresco", price: "270 Kč", desc: "Smetanový základ, mozzarella, čerstvý tuňák, kapary, polníček, pesto", img: "./images/yuma/Pizza_s_čerstvým_tuňákem__slice_-removebg-preview.png" },
-		{ name: "Frutti di Mare", price: "320 Kč", desc: "Smetanový základ, mozzarella, mořské plody, cherry rajčata, rukola", img: "./images/yuma/Pizza_Frutti_de_Mare__s_Mořskými_plody_-removebg-preview.png" }
-	  ]
-	},
-	{
-	  title: "Speciální",
-	  items: [
-		{ name: "Al nero", price: "290 Kč", desc: "Smetanový základ, mozzarella, čerstvý losos, špenát, kaviár, smetanový sýr", img: "./images/yuma/Pizza_s_Lososem_a_červeným_kaviárem-removebg-preview.png" },
-		{ name: "Nizza", price: "220 Kč", desc: "Smetanový základ, mozzarella, kuřecí filet, ananas, wakame salát, pikantně medová omáčka", img: "./images/yuma/margarita-removebg-preview.png" }
-	  ]
-	}
-];
-
-  const menuSections = document.getElementById("menu-sections");
-  const cartCount = document.getElementById("cart-count");
-  const cartItemsList = document.getElementById("cart-items");
-
-  pizzaCategories.forEach((section) => {
-    const sectionDiv = document.createElement("div");
-    sectionDiv.className = "mb-5";
-    sectionDiv.innerHTML = `<h3 class="mb-4 text-center">${section.title}</h3><div class="row"></div>`;
-    const row = sectionDiv.querySelector(".row");
-
-    section.items.forEach(pizza => {
-      const col = document.createElement("div");
-      col.className = "col-lg-4 col-md-6 mb-4";
-      col.innerHTML = `
-        <div class="card h-100">
-          <img src="${pizza.img}" class="card-img-top" alt="${pizza.name}" />
-          <div class="card-body">
-            <h5 class="card-title">${pizza.name}</h5>
-            <p class="card-text">${pizza.desc}</p>
-            <p class="fw-bold">${pizza.price}</p>
-            <button class="btn btn-outline-primary" onclick="addToCart('${pizza.name}', '${pizza.price}')">Přidat do košíku</button>
+  <!-- Header Start -->
+  <header>
+    <div class="container-big">
+      <div class="header-inner">
+        <div class="row align-items-center">
+          <div class="col-xl-3 col-lg-3 col-md-3 col-5">
+            <div class="header-logo">
+              <a href="index.html"><img src="./images/yuma/logo.svg" alt="Brand Logo" /></a>
+            </div>
+          </div>
+          <div class="col-xl-9 col-lg-9 col-md-9 col-7">
+            <div class="main-menu">
+              <div class="menu-toggle"><span></span></div>
+              <div class="menu">
+                <div class="sidemenu-header">
+                  <div class="sidemenu-logo">
+                    <img src="./images/yuma/logo.svg" alt="Brand Logo" />
+                  </div>
+                  <div class="sidemenu-close"><span></span></div>
+                </div>
+                <ul>
+                  <li><a href="index.html">Domů</a></li>
+                  <li><span class="opener"></span><a class="active" href="javascript:void(0)">Menu</a>
+                    <ul class="dropdown-content">
+                      <li><a href="shop-list.html">Pizza</a></li>
+                      <li><a href="sushi.html">Sushi</a></li>
+                      <li><a href="napoje.html">Nápoje</a></li>
+                      <li><a href="neco-navic.html">Něco navíc</a></li>
+                    </ul>
+                  </li>
+                  <li><span class="opener"></span><a href="javascript:void(0)">Novinky</a>
+                    <ul class="dropdown-content">
+                      <li><a href="novinky.html">Nové pizzy v nabídce</a></li>
+                      <li><a href="akce.html">Akční nabídky a slevy</a></li>
+                      <li><a href="our-team.html">Ze zákulisí pece</a></li>
+                      <li><a href="pizza-mesice.html">Pizza měsíce</a></li>
+                      <li><a href="hodnocení.html">Řekli jste o nás</a></li>
+                    </ul>
+                  </li>
+                  <li><span class="opener"></span><a href="javascript:void(0)">O nás</a>
+                    <ul class="dropdown-content">
+                      <li><a href="blog-right.html">Naše příběh</a></li>
+                      <li><a href="blog-left.html">Náš tým</a></li>
+                      <li><a href="blog-detail.html">Naše hodnoty</a></li>
+                    </ul>
+                  </li>
+                  <li><a href="contact-us.html">Kontakt</a></li>
+                </ul>
+              </div>
+              <div class="icon-menu">
+                <ul>
+                  <li class="search">
+                    <a href="javascript:void(0)">
+                      <img src="images/search-icon.png" class="normal-icon" alt="Search Icon" />
+                      <img src="images/search-icon-2.png" class="hover-icon" alt="Search Icon" />
+                    </a>
+                  </li>
+                  <li class="cart-slide position-r">
+                    <a href="cart.html">
+                      <img src="images/cart-icon.png" class="normal-icon" alt="Cart Icon" />
+                      <img src="images/cart-icon-2.png" class="hover-icon" alt="Cart Icon" />
+                      <span class="cart-count">0</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
-      `;
-      row.appendChild(col);
-    });
+      </div>
+    </div>
+  </header>
+  <!-- Header End -->
 
-    menuSections.appendChild(sectionDiv);
-  });
+  <!-- Sub Banner Start -->
+  <section class="sub-banner bg-yellow overflow-h position-r">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-xl-6 col-lg-6 col-md-12">
+          <div class="sub-banner-content wow fadeInLeft">
+            <h1 class="sub-banner-title">YU-MA <span class="sub-banner-title2">nápoje</span></h1>
+            <p>“K dobré pizze patří i dobré pití – máme pro vás to nejlepší“</p>
+          </div>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12">
+          <div class="bread-crumb wow fadeInRight">
+            <ul>
+              <li><a href="index.html">Domů</a></li>
+              <li>Nápoje</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="black-jamun wow fadeInLeft animation-delay-5">
+      <img src="./images/yuma/hra.png" alt="black-jamun">
+    </div>
+    <div class="onion-img wow fadeInUp animation-delay-6">
+      <img src="images/onion.png" alt="onion">
+    </div>
+    <div class="tamato-img wow fadeInUp animation-delay-7">
+      <img src="images/tamato.png" alt="tamato">
+    </div>
+    <div class="leaf-img wow fadeInRight animation-delay-8">
+      <img src="images/banner-leaf.png" alt="banner-leaf">
+    </div>
+  </section>
+  <!-- Sub Banner End -->
 
-  function addToCart(name, price) {
-  const cart = JSON.parse(localStorage.getItem("cart")) || [];
-  cart.push({ name, price });
-  localStorage.setItem("cart", JSON.stringify(cart));
+  <main class="container my-5">
+    <div id="menu-sections"></div>
+  </main>
 
-  // оновлення лічильника в хедері, якщо потрібно
-  const cartCount = document.querySelector(".cart-count");
-  if (cartCount) {
-    cartCount.textContent = cart.length;
+  <!-- Footer Start -->
+  <footer>
+    <div class="footer ptb-100 bg-yellow position-r overflow-h">
+      <div class="footer-pattern-1 wow fadeInLeft animation-delay-5">
+        <img src="./images/yuma/logo.svg" alt="logo" />
+      </div>
+      <div class="footer-pattern-2 wow fadeInRight animation-delay-5">
+        <img src="./images/yuma/hra.png" alt="footer-pattern" />
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-xl-3 col-lg-6 col-md-6 footer-box wow fadeInUp">
+            <h6 class="footer-title text-uppercase">Informace</h6>
+            <ul class="footer-menu">
+              <li><a href="index.html">Domů</a></li>
+              <li><a href="blog-left.html">Menu</a></li>
+              <li><a href="about.html">Novinky</a></li>
+              <li><a href="our-menu.html">O nas</a></li>
+            </ul>
+          </div>
+          <div class="col-xl-3 col-lg-6 col-md-6 footer-box wow fadeInUp">
+            <h6 class="footer-title text-uppercase">Kontakt</h6>
+            <ul class="footer-menu">
+              <li><a>Adresa</a></li>
+              <li><a class="footer-map-link" href="https://www.google.com/maps/place/Přátelství+180,+104+00+Praha+22-Uhříněves" target="_blank" rel="noopener noreferrer">Přátelství 180<br />104 00 Praha 22 – Uhříněves</a></li>
+              <li><a class="link mobile-menu-phone-link" href="tel:+420776800436">+420606250600</a></li>
+            </ul>
+          </div>
+          <div class="col-xl-3 col-lg-6 col-md-6 footer-box wow fadeInUp">
+            <h6 class="footer-title text-uppercase">Otevírací doba</h6>
+            <ul class="footer-menu">
+              <li><a>Po - Ne 10:00-22:00</a></li>
+            </ul>
+          </div>
+          <div class="col-xl-3 col-lg-6 col-md-6 footer-box wow fadeInUp">
+            <h6 class="footer-title text-uppercase">Sledujte nás</h6>
+            <ul class="footer-social">
+              <li><a href="#" class="facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+              <li><a href="#" class="instagram"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+              <li><a href="#" class="tiktok"><i class="fab fa-tiktok" aria-hidden="true"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="copyright">
+      <div class="container">
+        <div class="text-center">
+          <p>&#169; Všechna práva vyhrazena společnosti YU-MA Pizza © 2025 <a href="#">Templatescoder</a></p>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- Footer End -->
+  <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="cartModalLabel">Košík</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <ul id="cart-items" class="list-group mb-3"></ul>
+          <form id="cartOrderForm">
+            <div class="mb-3">
+              <label for="customerName" class="form-label">Vaše jméno</label>
+              <input type="text" class="form-control" id="customerName" required />
+            </div>
+            <div class="mb-3">
+              <label for="customerEmail" class="form-label">E-mail</label>
+              <input type="email" class="form-control" id="customerEmail" required />
+            </div>
+            <button type="submit" class="btn btn-primary">Odeslat objednávku</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Скрипт -->
+  <script>
+const drinkCategories = [
+  {
+    title: "Minerální voda",
+    items: [
+      {
+        name: "Mattoni jemná",
+        price: "25 Kč",
+        desc: "Přírodní minerální voda jemně perlivá",
+        img: "./images/yuma/matoni.png"
+      }
+    ]
+  },
+  {
+    title: "Nealkoholické pivo",
+    items: [
+      {
+        name: "Birell Pomelo & grep",
+        price: "30 Kč",
+        desc: "Ovocné osvěžení bez alkoholu",
+        img: "./images/yuma/birell ovoc.png"
+      },
+      {
+        name: "Birell Světlý",
+        price: "28 Kč",
+        desc: "Tradiční nealkoholické pivo",
+        img: "./images/yuma/birell.png"
+      }
+    ]
+  },
+  {
+    title: "Energetické nápoje",
+    items: [
+      {
+        name: "Red Bull",
+        price: "45 Kč",
+        desc: "Dodá ti křídla – klasická energie",
+        img: "./images/yuma/redbul.png"
+      }
+    ]
+  },
+  {
+    title: "Džusy a ovocné nápoje",
+    items: [
+      {
+        name: "Relax pomeranč",
+        price: "35 Kč",
+        desc: "100% pomerančový džus – zdroj vitamínu C",
+        img: "./images/yuma/relax.png"
+      },
+      {
+        name: "Capri-Sun multivitamin",
+        price: "25 Kč",
+        desc: "Multivitamínový ovocný nápoj",
+        img: "./images/yuma/caprisun.png"
+      }
+    ]
+  },
+  {
+    title: "Limonády",
+    items: [
+      {
+        name: "Fanta pomeranč",
+        price: "30 Kč",
+        desc: "Osvěžující pomerančová limonáda",
+        img: "./images/yuma/fanta.png"
+      },
+      {
+        name: "Coca-Cola Original",
+        price: "30 Kč",
+        desc: "Klasický nápoj s kofeinem",
+        img: "./images/yuma/cola.png"
+      }
+    ]
+  },
+  {
+    title: "Pivo",
+    items: [
+      {
+        name: "Svijany Máz",
+        price: "32 Kč",
+        desc: "Tradiční nepasterizovaný světlý ležák",
+        img: "./images/yuma/svijany.png"
+      }
+    ]
   }
-}
+];
 
-  function updateCartList() {
-    cartItemsList.innerHTML = "";
-    cart.forEach((item, index) => {
-      const li = document.createElement("li");
-      li.className = "list-group-item d-flex justify-content-between align-items-center";
-      li.innerHTML = `${item.name} - ${item.price} <button class='btn btn-sm btn-danger' onclick='removeFromCart(${index})'>×</button>`;
-      cartItemsList.appendChild(li);
-    });
-  }
 
-  function removeFromCart(index) {
-    cart.splice(index, 1);
-    cartCount.textContent = cart.length;
-    updateCartList();
-  }
+    const menuSections = document.getElementById("menu-sections");
+    const cartItemsList = document.getElementById("cart-items");
+    const cartCount = document.querySelector(".cart-count");
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-  document.getElementById("cartOrderForm").addEventListener("submit", function (e) {
-    e.preventDefault();
-
-    const templateParams = {
-      order_list: cart.map(item => `${item.name} - ${item.price}`).join("\n"),
-      customer_name: document.getElementById("customerName").value,
-      customer_email: document.getElementById("customerEmail").value
-    };
-
-    emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", templateParams)
-      .then(() => {
-        alert("Objednávka byla úspěšně odeslána!");
-        cart.length = 0;
-        cartCount.textContent = "0";
-        updateCartList();
-        document.getElementById("cartOrderForm").reset();
-        const modal = bootstrap.Modal.getInstance(document.getElementById("cartModal"));
-        modal.hide();
-      }, (error) => {
-        alert("Chyba při odesílání: " + error.text);
+    function renderCart() {
+      cartItemsList.innerHTML = "";
+      cart.forEach((item, index) => {
+        const li = document.createElement("li");
+        li.className = "list-group-item d-flex justify-content-between align-items-center";
+        li.innerHTML = `${item.name} - ${item.price} <button class='btn btn-sm btn-danger' onclick='removeFromCart(${index})'>&times;</button>`;
+        cartItemsList.appendChild(li);
       });
-  });
-</script>
+      cartCount.textContent = cart.length;
+    }
 
-		
-	</main>
-	<!-- End Of Main Div -->
+    function removeFromCart(index) {
+      cart.splice(index, 1);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      renderCart();
+    }
 
+    function addToCart(name, price) {
+      cart.push({ name, price });
+      localStorage.setItem("cart", JSON.stringify(cart));
+      renderCart();
+    }
 
-	<!-- Start Of Footer -->
-	<footer>
-		<div class="footer ptb-100 bg-yellow position-r overflow-h">
-		  <div class="footer-pattern-1 wow fadeInLeft animation-delay-5">
-			<img src="./images/yuma/logo.svg" alt="logo" />
-		  </div>
-		  <div class="footer-pattern-2 wow fadeInRight animation-delay-5">
-			<img src="./images/yuma/hra.png" alt="footer-pattern" />
-		  </div>
-		  <div class="container">
-			<div class="row">
-			  <div class="col-xl-3 col-lg-6 col-md-6 footer-box wow fadeInUp">
-				<h6 class="footer-title text-uppercase">Informace</h6>
-				<ul class="footer-menu">
-				  <li><a href="index.html">Domů</a></li>
-				  <li><a href="blog-left.html">Menu</a></li>
-				  <li><a href="about.html">Novinky</a></li>
-				  <li><a href="our-menu.html">O nas</a></li>
-				</ul>
-			  </div>
-			  <div class="col-xl-3 col-lg-6 col-md-6 footer-box wow fadeInUp">
-				<h6 class="footer-title text-uppercase">Kontakt</h6>
-				<ul class="footer-menu">
-				  <li><a>Adresa</a></li>
-				  <li><a
-					  class="footer-map-link"
-					  href="https://www.google.com/maps/place/Přátelství+180,+104+00+Praha+22-Uhříněves"
-					  target="_blank"
-					  rel="noopener noreferrer"
-					>
-					  Přátelství 180<br />
-					  104 00 Praha 22 – Uhříněves
-					</a></li>
-				  <li> <a class="link mobile-menu-phone-link" href="tel:+420776800436"
-					  >+420606250600</a></li>
-				</ul>
-			  </div>
-			  <div class="col-xl-3 col-lg-6 col-md-6 footer-box wow fadeInUp">
-				<h6 class="footer-title text-uppercase">Otevírací doba</h6>
-				<ul class="footer-menu">
-				  <li><a>Po    10:00-22:00</a></li>
-				  <li><a>Út    10:00-22:00</a></li>
-				  <li><a>St    10:00-22:00</a></li>
-				  <li><a>Čt    10:00-22:00</a></li>
-				  <li><a>Pá    10:00-22:00</a></li>
-				  <li><a>So    10:00-22:00</a></li>
-				  <li><a>Ne    10:00-22:00</a></li>
-				</ul>
-			  </div>
-			  <div class="col-xl-3 col-lg-6 col-md-6 footer-box wow fadeInUp">
-				  <h6 class="footer-title text-uppercase">Sledujte nás na sociálních sítích</h6>
-				  <ul class="footer-social">
-					<li>
-					  <a href="#" class="facebook">
-						<i class="fa fa-facebook" aria-hidden="true"></i>
-					  </a>
-					</li>
-					<li>
-					  <a href="#" class="instagram">
-						<i class="fa fa-instagram" aria-hidden="true"></i>
-					  </a>
-					</li>
-					<li>
-					  <a href="#" class="tiktok">
-						<i class="fab fa-tiktok" aria-hidden="true"></i>
-						<span class="visually-hidden">TikTok</span>
-					  </a>
-					</li>
-				  </ul>
-				  
-				
-			  
-		<div class="copyright">
-		  <div class="container">
-			<div class="text-center">
-			  <p>
-				&#169; Všechna práva vyhrazena společnosti YU-MA Pizza © 2025
-				<a href="#">Templatescoder</a>
-			  </p>
-			</div>
-		  </div>
-		</div>
-	  </footer>
-	<!-- End Of Footer -->
+    drinkCategories.forEach((section) => {
+      const sectionDiv = document.createElement("div");
+      sectionDiv.className = "mb-5";
+      sectionDiv.innerHTML = `<h3 class="mb-4 text-center">${section.title}</h3><div class="row"></div>`;
+      const row = sectionDiv.querySelector(".row");
 
+      section.items.forEach(drink => {
+        const col = document.createElement("div");
+        col.className = "col-lg-4 col-md-6 mb-4";
+        col.innerHTML = `
+          <div class="card h-100">
+            <img src="${drink.img}" class="card-img-top" alt="${drink.name}" />
+            <div class="card-body">
+              <h5 class="card-title">${drink.name}</h5>
+              <p class="card-text">${drink.desc}</p>
+              <p class="fw-bold">${drink.price}</p>
+              <button class="btn btn-outline-primary" onclick="addToCart('${drink.name}', '${drink.price}')">Přidat do košíku</button>
+            </div>
+          </div>
+        `;
+        row.appendChild(col);
+      });
 
-	<!-- Start Of Js -->
-	<script src="js/jquery-3.4.1.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/animation.js"></script>
-	<script src="js/pizzon.js"></script> 
+      menuSections.appendChild(sectionDiv);
+    });
+
+    renderCart();
+
+    document.getElementById("cartOrderForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      alert("Objednávka odeslána!");
+      localStorage.removeItem("cart");
+      cart.length = 0;
+      renderCart();
+    });
+  </script>
 </body>
 </html>

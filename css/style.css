@@ -8085,6 +8085,14 @@ _______________________________________________________*/
 
 
 
+.card-img-top {
+  height: 240px;
+  object-fit: contain;
+  background-color: #fff5e6;
+  padding: 10px;
+}
+
+
 
 
 
