@@ -10,11 +10,17 @@
   <link rel="stylesheet" href="css/style.css" />
   <style>
     body { position: relative; overflow-x: hidden; }
-    #pizza-menu { background-color: transparent !important; }
+    #pizza-menu { background-color: #ffffff !important; }
     .symbol { position: absolute; width: 40px; height: 40px; stroke: #111; stroke-width: 6; fill: none; opacity: 0; animation: fadeInOut 6s infinite ease-in-out; }
     @keyframes fadeInOut { 0% { opacity: 0; } 25% { opacity: 0.3; } 50% { opacity: 0.5; } 75% { opacity: 0.3; } 100% { opacity: 0; } }
     main, header, footer { position: relative; z-index: 1; }
-
+	#pizza-menu {
+    background-color: #ffffff !important;
+  }
+  #pizza-menu .card {
+    background-color: #ffffff !important;
+  }
+  
     /* Випадаючі меню */
 	ul.dropdown-content {
     position: absolute;
@@ -266,18 +272,21 @@
 		<!-- End Of Sub Banner -->
 
 <!-- Start Pizza Menu Section -->
-<section class="section-padding bg-light" id="pizza-menu">
+<section class="section-padding" id="pizza-menu">
 	<style>
-	  .card-body .fw-bold { color: #f1491c !important; }
-	  .card-body .btn-outline-primary {
-		border-color: #f1491c;
-		color: #f1491c;
-	  }
-	  .card-body .btn-outline-primary:hover {
-		background-color: #f1491c;
-		color: white;
-	  }
-	</style>
+		.card {
+		  background-color: #ffffff !important;
+		}
+		.card-body .fw-bold { color: #f1491c !important; }
+		.card-body .btn-outline-primary {
+		  border-color: #f1491c;
+		  color: #f1491c;
+		}
+		.card-body .btn-outline-primary:hover {
+		  background-color: #f1491c;
+		  color: white;
+		}
+	  </style>
 	<div class="container">
 	  <div class="section-title text-center">
 		<h2>Naše nabídka pizz</h2>
@@ -534,7 +543,7 @@ let cart = JSON.parse(localStorage.getItem("cart")) || [];
 	<script src="js/jquery-3.4.1.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/animation.js"></script>
-	<script src="js/pizzon.js"></script> 
+	<script src="js/yuma.js"></script> 
 	<script>
 		const container = document.getElementById('background-pattern');
 		const symbols = ['X', 'O'];

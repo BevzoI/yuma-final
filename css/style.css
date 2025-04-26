@@ -4602,15 +4602,20 @@ _______________________________________________________*/
   margin-bottom: 25px;
   font-family: 'Peace Sans', sans-serif;
   font-size: 6rem; /* можеш змінити під свій дизайн */
+  font-weight: bold;
   text-transform: uppercase;
   color: #f1491c; /* приклад кольору з логотипу */
   letter-spacing: 2px;
 }
 
 .home-banner-title span {
-  font-family: 'Peace Sans', sans-serif; /* або інший рукописний шрифт */
-  font-size: 3rem;
-  color: black; 
+  font-family: 'Peace Sans', sans-serif;
+  font-size: 80px; /* або бажаний розмір */
+  font-weight: bold;
+  color: black;
+  text-transform: lowercase; /* залишає всі букви малими */
+  line-height: 1;
+  margin: 0;
 }
 
 .home-banner-desc {
@@ -4680,8 +4685,8 @@ _______________________________________________________*/
 }
 
 .animated .home-img-1 {
-  -webkit-transform: rotate(0deg) scale(1);
-  transform: rotate(0deg) scale(1);
+  -webkit-transform: rotate(0deg) scale(1.2); /* Збільшили масштаб до 1.2 */
+  transform: rotate(0deg) scale(1.2);
 }
 
 .slider-round {
@@ -4726,52 +4731,129 @@ _______________________________________________________*/
 
 /*----- Daily Fresh Css -----*/
 .daily-fresh {
-  margin-top: -110px;
-  position: relative;
-}
-
-.daily-fresh-inner {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
+  justify-content: center;
+  gap: 40px;
+  padding: 40px;
+  box-sizing: border-box;
+  flex-wrap: wrap;
 }
 
-.daily-fresh-inner .fresh-img {
-  width: 410px;
+.fresh-img,
+.fresh-content {
+  flex: 1 1 50%;
+  max-width: 50%;
 }
 
-.daily-fresh-inner .fresh-content {
-  width: calc(100% - 410px);
-  padding-left: 90px;
+.fresh-img img {
+  width: 100%;
+  height: auto;
+  max-width: 600px;
+  display: block;
+  margin: 0 auto;
 }
 
-.daily-fresh-inner .title {
-  max-width: 220px;
-  padding-bottom: 20px;
+.fresh-content {
+  text-align: left;
 }
 
-.daily-fresh-inner .fresh-des {
-  max-width: 350px;
+.fresh-content .title {
+  font-size: 2rem;
+  margin-bottom: 20px;
 }
 
-.daily-fresh-vacter {
-  position: absolute;
-  bottom: 50px;
-  left: 60%;
+.fresh-des p {
+  font-size: 1.2rem;
 }
+
+/* 📱 Mobile adaptation */
+@media (max-width: 768px) {
+  .daily-fresh {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .fresh-img,
+  .fresh-content {
+    flex: 1 1 100%;
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .fresh-content .title {
+    font-size: 1.6rem;
+  }
+
+  .fresh-des p {
+    font-size: 1rem;
+  }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.fresh-content .title {
+  font-size: 6rem;
+  margin-bottom: 20px;
+  animation: pulse 2s infinite ease-in-out;
+}
+
+/* Пульсуючий ефект */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.pulse-text {
+  animation: pulse 2s infinite ease-in-out;
+}
+
+/* Fade-in з масштабом */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease-out;
+}
+
+/* Коли активується */
+.fade-in.active {
+  animation: fadeInUp 1s forwards;
+}
+
+
 
 /*----- Our Menu Css -----*/
+
 .our-menu {
-  overflow: hidden;
+  width: 100%;
+  padding-left: 30px;
+  padding-right: 30px;
+  box-sizing: border-box;
 }
 
+.our-menu-container {
+  width: 100%;
+}
+
+
 .our-menu-content {
-  margin-left: -12%;
+  margin-left: 0;
 }
 
 .menu-item-box {
@@ -4795,6 +4877,8 @@ _______________________________________________________*/
 
 .menu-slider .menu-item-box {
   margin-top: 0px;
+  width: 100%; /* додаємо! */
+  max-width: none; 
 }
 
 .menu-item-head {
@@ -8101,7 +8185,26 @@ _______________________________________________________*/
   padding: 10px;
 }
 
+select.form-control {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: #fff url('data:image/svg+xml;utf8,<svg fill="gray" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>') no-repeat right 1rem center;
+  background-size: 1.5rem;
+  padding-right: 3rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  height: 50px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
 
+/* При наведенні або фокусі */
+select.form-control:hover,
+select.form-control:focus {
+  border-color: #ff9900;
+  box-shadow: 0 0 5px rgba(255, 153, 0, 0.5);
+}
 
 
 
