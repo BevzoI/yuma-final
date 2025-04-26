@@ -13,27 +13,26 @@
     main, header, footer { position: relative; z-index: 1; }
 
     /* Хрестики-нолики фон */
-    #background-pattern {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-      pointer-events: none;
-      overflow: hidden;
-      opacity: 1;
-      transition: opacity 0.5s ease;
-    }
-    .symbol {
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      stroke-width: 2;
-      fill: none;
-      animation: moveAndFade 20s infinite ease-in-out alternate;
-      opacity: 0.15;
-    }
+	#background-pattern {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 5; /* ставимо поверх карток */
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.symbol {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  stroke-width: 3;
+  fill: none;
+  opacity: 0.3;
+  transform-origin: center center;
+}
     @keyframes moveAndFade {
       0% { transform: translate(0, 0) scale(1); opacity: 0.15; }
       50% { transform: translate(10px, 10px) scale(1.2); opacity: 0.2; }
@@ -257,7 +256,8 @@
 		<!-- End Of Sub Banner -->
 
 <!-- Start Pizza Menu Section -->
-<section class="section-padding" id="pizza-menu">
+<section class="section-padding position-relative" id="pizza-menu">
+	<div id="background-pattern"></div>
 	<!-- Новий стиль карток -->
 <style>
 .card {
@@ -609,6 +609,106 @@ let cart = JSON.parse(localStorage.getItem("cart")) || [];
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/animation.js"></script>
 	<script src="js/yuma.js"></script> 
+	<script>
+		const container = document.getElementById('background-pattern');
+		const symbols = ['X', 'O'];
+		const colors = ['#111', '#f1491c'];
+		
+		function createSymbol() {
+		  const svgNS = 'http://www.w3.org/2000/svg';
+		  const svg = document.createElementNS(svgNS, 'svg');
+		  svg.setAttribute('class', 'symbol');
+		  svg.setAttribute('viewBox', '0 0 40 40');
+		
+		  const x = Math.random() * window.innerWidth;
+		  const y = Math.random() * document.body.scrollHeight;
+		  svg.style.left = `${x}px`;
+		  svg.style.top = `${y}px`;
+		
+		  const type = symbols[Math.floor(Math.random() * symbols.length)];
+		  const color = colors[Math.floor(Math.random() * colors.length)];
+		
+		  if (type === 'X') {
+			const line1 = document.createElementNS(svgNS, 'line');
+			line1.setAttribute('x1', '5');
+			line1.setAttribute('y1', '5');
+			line1.setAttribute('x2', '35');
+			line1.setAttribute('y2', '35');
+			line1.setAttribute('stroke', color);
+			line1.setAttribute('stroke-width', '3');
+		
+			const line2 = document.createElementNS(svgNS, 'line');
+			line2.setAttribute('x1', '35');
+			line2.setAttribute('y1', '5');
+			line2.setAttribute('x2', '5');
+			line2.setAttribute('y2', '35');
+			line2.setAttribute('stroke', color);
+			line2.setAttribute('stroke-width', '3');
+		
+			svg.appendChild(line1);
+			svg.appendChild(line2);
+		  } else {
+			const circle = document.createElementNS(svgNS, 'circle');
+			circle.setAttribute('cx', '20');
+			circle.setAttribute('cy', '20');
+			circle.setAttribute('r', '15');
+			circle.setAttribute('stroke', color);
+			circle.setAttribute('stroke-width', '3');
+			circle.setAttribute('fill', 'none');
+			svg.appendChild(circle);
+		  }
+		
+		  randomizeAnimation(svg);
+		  container.appendChild(svg);
+		}
+		
+		function randomizeAnimation(symbol) {
+		  const moveX = (Math.random() - 0.5) * 200;
+		  const moveY = (Math.random() - 0.5) * 200;
+		  const scale = 0.8 + Math.random() * 0.5;
+		  const rotation = Math.random() * 360;
+		  const duration = 10 + Math.random() * 20;
+		  const delay = Math.random() * 5;
+		
+		  symbol.animate([
+			{ transform: `translate(0, 0) scale(1) rotate(0deg)`, opacity: 0.3 },
+			{ transform: `translate(${moveX}px, ${moveY}px) scale(${scale}) rotate(${rotation}deg)`, opacity: 0.6 },
+			{ transform: `translate(0, 0) scale(1) rotate(360deg)`, opacity: 0.3 }
+		  ], {
+			duration: duration * 1000,
+			iterations: Infinity,
+			direction: 'alternate',
+			easing: 'ease-in-out',
+			delay: delay * 1000,
+		  });
+		
+		  setInterval(() => {
+			const elements = symbol.querySelectorAll('*');
+			elements.forEach(el => {
+			  el.setAttribute('stroke', colors[Math.floor(Math.random() * colors.length)]);
+			});
+		  }, 3000);
+		}
+		
+		function fillScreen() {
+		  container.innerHTML = '';
+		  const numSymbols = 70;
+		  for (let i = 0; i < numSymbols; i++) {
+			createSymbol();
+		  }
+		}
+		
+		fillScreen();
+		window.addEventListener('resize', fillScreen);
+		
+		window.addEventListener('scroll', () => {
+		  const maxScroll = window.innerHeight;
+		  const currentScroll = window.scrollY;
+		  let opacity = 1 - currentScroll / maxScroll;
+		  if (opacity < 0) opacity = 0;
+		  container.style.opacity = opacity;
+		});
+		</script>		
 	
 </body>
 </html>
