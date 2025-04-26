@@ -3404,7 +3404,7 @@ h6 {
 }
 
 .bg-yellow {
-  background-color: #fffaed;
+  background-color: #292927;
 }
 
 .black-jamun {
@@ -4409,7 +4409,7 @@ header.header-border.fixed::after {
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
   justify-content: space-between;
-  color: #111111;
+  color: #fff;
 }
 
 .cart-drawer .cart-footer .cart-button ul {
@@ -4857,12 +4857,27 @@ _______________________________________________________*/
 }
 
 .menu-item-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  min-height: 800px;
+  max-height: 800px;
+  padding: 30px 50px 50px 50px;
   border: 1px solid #e4ded9;
   border-radius: 30px;
-  padding: 30px 50px 50px 50px;
-  max-width: 800px;
-  margin: auto;
-  margin-top: 50px;
+  margin: 50px auto 0 auto;
+  box-sizing: border-box;
+  overflow: hidden;
+  text-align: center;
+}
+
+.menu-item-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .menu-item-box:hover .menu-item-img img {
@@ -4871,8 +4886,7 @@ _______________________________________________________*/
 }
 
 .menu-item-box.rotate-img:hover .menu-item-img img {
-  -webkit-transform: rotate(45deg);
-  transform: rotate(45deg);
+  transform: rotate(15deg) scale(1.05); /* легкий оберт і збільшення, а не 45 градусів */
 }
 
 .menu-slider .menu-item-box {
@@ -4880,6 +4894,38 @@ _______________________________________________________*/
   width: 100%; /* додаємо! */
   max-width: none; 
 }
+/* Для картинок напоїв */
+.menu-item-drink .menu-item-img {
+  height: auto; /* або padding-bottom: 20px, як у тебе було */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 20px;
+}
+
+.menu-item-drink .menu-item-img {
+  height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding-bottom: 20px;
+}
+
+.menu-item-drink .menu-item-img img {
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+  transition: all 400ms ease;
+}
+
+.menu-item-order {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+
 
 .menu-item-head {
   display: flex;
@@ -4892,11 +4938,32 @@ _______________________________________________________*/
   padding-bottom: 20px;
   text-align: center;
 }
+.menu-item-img {
+  height: 250px; /* Контейнер фіксованої висоти */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 20px;
+  text-align: center;
+  overflow: hidden; /* Додаємо! обов'язково */
+  position: relative; /* важливо для обмеження обертання */
+}
+
+.menu-item-img {
+  height: 300px; /* обмеження контейнера */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 20px;
+  text-align: center;
+}
 
 .menu-item-img img {
-  -webkit-transition: all 400ms ease;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain; /* дуже важливо: картинка пропорційно зменшується і не обрізається */
   transition: all 400ms ease;
-  margin: auto;
 }
 
 .menu-item-title {
@@ -4910,7 +4977,20 @@ _______________________________________________________*/
   word-break: break-word;
   line-height: 1.4;
 }
+.menu-text {
+  display: -webkit-box;
+  display: box; /* додай! */
+  -webkit-line-clamp: 2;
+  line-clamp: 2; /* додай! */
+  -webkit-box-orient: vertical;
+  box-orient: vertical; /* додай! */
+  overflow: hidden;
+}
 
+.menu-item-des.expanded .menu-text {
+  max-height: 1000px;
+  -webkit-line-clamp: unset;
+}
 
 
 .menu-item-price {
@@ -4945,8 +5025,38 @@ _______________________________________________________*/
 }
 
 .menu-item-des {
-  padding-bottom: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
 }
+
+.menu-item-des.expanded {
+  max-height: 1000px; /* розгортання */
+}
+
+.menu-item-des p {
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* показати 2 рядки */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.5em;
+}
+
+.menu-item-des.expanded p {
+  -webkit-line-clamp: unset;
+  overflow: visible;
+}
+
+.read-more {
+  display: block;
+  margin-top: 10px;
+  font-size: 18px;
+  color: #f15b2a;
+  cursor: pointer;
+}
+
 
 .menu-slider .owl-nav {
   position: absolute;
@@ -5289,9 +5399,9 @@ _______________________________________________________*/
 
 /*----- Sub Banner -----*/
 .sub-banner {
-  padding-top: 300px;
+  padding-top: 200px;
   padding-bottom: 160px;
-  background-color: #fffaed;
+  background-color: #403f3f;
 }
 
 .sub-banner .black-jamun {
@@ -5336,6 +5446,27 @@ _______________________________________________________*/
   font-size: 24px;
   line-height: 42px;
 }
+
+
+.wave-divider {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  transform: rotate(180deg);
+  z-index: 2;
+}
+
+.wave-divider svg {
+  display: block;
+  position: relative;
+  width: calc(100% + 1.3px);
+  height: 100px;
+}
+
+
 
 .bread-crumb {
   text-align: right;
@@ -6857,6 +6988,7 @@ _______________________________________________________*/
 
 .footer-title {
   padding-bottom: 20px;
+  color: #fff;
 }
 
 .footer-menu li {
@@ -6865,7 +6997,7 @@ _______________________________________________________*/
 
 .footer-menu li a {
   font-size: 16px;
-  color: #777777;
+  color: #fff;
 }
 
 .footer-menu li a:hover {
@@ -6912,9 +7044,7 @@ _______________________________________________________*/
   background: #cc2127;
 }
 
-.footer-social li a.twitter {
-  background: #2caae1;
-}
+
 
 .footer-social li a.instagram {
   background: #dc4a38;
