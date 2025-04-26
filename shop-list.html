@@ -10,111 +10,102 @@
   <link rel="stylesheet" href="css/style.css" />
   <style>
     body { position: relative; overflow-x: hidden; }
-    #pizza-menu { background-color: #ffffff !important; }
-    .symbol { position: absolute; width: 40px; height: 40px; stroke: #111; stroke-width: 6; fill: none; opacity: 0; animation: fadeInOut 6s infinite ease-in-out; }
-    @keyframes fadeInOut { 0% { opacity: 0; } 25% { opacity: 0.3; } 50% { opacity: 0.5; } 75% { opacity: 0.3; } 100% { opacity: 0; } }
     main, header, footer { position: relative; z-index: 1; }
-	#pizza-menu {
-    background-color: #ffffff !important;
-  }
-  #pizza-menu .card {
-    background-color: #ffffff !important;
-  }
-  
-    /* Випадаючі меню */
-	ul.dropdown-content {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background-color: #fff;
-    z-index: 99999;
-    display: none;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    min-width: 180px;
-  }
 
-  li:hover > ul.dropdown-content {
-    display: block;
-  }
-
-  .main-menu,
-  .menu,
-  .menu ul li {
-    position: relative;
-    overflow: visible;
-    z-index: 1001;
-  }
-
-  /* Забезпечення того, щоб фоновий шар був під усім */
-  #background-pattern {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-    pointer-events: none;
-  }
-
-  main, header, footer {
-    position: relative;
-    z-index: 1;
-  }
-
-  /* Стили для бургер-меню */
-  .menu-toggle {
-    display: none;
-    cursor: pointer;
-    flex-direction: column;
-    gap: 6px;
-    padding: 10px;
-  }
-
-  .menu-toggle span {
-    display: block;
-    height: 3px;
-    width: 25px;
-    background: #111;
-  }
-
-  @media (max-width: 991.98px) {
-    .menu {
-      display: none;
-      position: absolute;
-      top: 100%;
-      right: 0;
-      background: white;
-      width: 100%;
-      z-index: 1002;
-    }
-
-    .menu.active {
-      display: block;
-    }
-
-    .menu-toggle {
-      display: flex;
-    }
-
-    ul.dropdown-content {
-      position: relative;
+    /* Хрестики-нолики фон */
+    #background-pattern {
+      position: fixed;
       top: 0;
       left: 0;
-      box-shadow: none;
-      z-index: 1003;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+      opacity: 1;
+      transition: opacity 0.5s ease;
+    }
+    .symbol {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      stroke-width: 2;
+      fill: none;
+      animation: moveAndFade 20s infinite ease-in-out alternate;
+      opacity: 0.15;
+    }
+    @keyframes moveAndFade {
+      0% { transform: translate(0, 0) scale(1); opacity: 0.15; }
+      50% { transform: translate(10px, 10px) scale(1.2); opacity: 0.2; }
+      100% { transform: translate(-10px, -10px) scale(1); opacity: 0.15; }
     }
 
-    li:hover > ul.dropdown-content {
-      display: block;
+    /* Стилі карток піци */
+    .card {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(6px);
+      border: 1px solid #f0f0f0;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease-out;
     }
-  }
+    .card.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+    }
+    .card-img-top {
+      background: transparent !important;
+      border-bottom: 1px solid #eee;
+      padding: 20px;
+      object-fit: contain;
+      height: 220px;
+    }
+    .card-body {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(2px);
+      padding: 1.5rem;
+      text-align: center;
+    }
+    .card-title {
+      font-size: 1.4rem;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+    .card-text {
+      font-size: 1rem;
+      color: #555;
+      margin-bottom: 1rem;
+      min-height: 60px;
+    }
+    .card-body .fw-bold {
+      color: #f1491c !important;
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .card-body .btn-outline-primary {
+      border-color: #f1491c;
+      color: #f1491c;
+      border-radius: 25px;
+      padding: 8px 20px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .card-body .btn-outline-primary:hover {
+      background-color: #f1491c;
+      color: white;
+    }
   </style>
 </head>
 <body>
-  <div id="background-pattern" style="position:absolute; top:0; left:0; width:100%; height:100%; z-index:0; pointer-events:none;"></div>
+
+<div id="background-pattern"></div>
+
 
   <!-- Preloader -->
   <div id="preloader" class="preloader">
@@ -257,13 +248,7 @@
 				<img src="./images/yuma/hra.png" alt="black-jamun">
 			</div>
 
-			<div class="onion-img wow fadeInUp animation-delay-6">
-				<img src="images/onion.png" alt="onion">
-			</div>
 
-			<div class="tamato-img wow fadeInUp animation-delay-7">
-				<img src="images/tamato.png" alt="tamato">
-			</div>
 
 			<div class="leaf-img wow fadeInRight animation-delay-8">
 				<img src="images/banner-leaf.png" alt="banner-leaf">
@@ -273,20 +258,100 @@
 
 <!-- Start Pizza Menu Section -->
 <section class="section-padding" id="pizza-menu">
-	<style>
-		.card {
-		  background-color: #ffffff !important;
-		}
-		.card-body .fw-bold { color: #f1491c !important; }
-		.card-body .btn-outline-primary {
-		  border-color: #f1491c;
-		  color: #f1491c;
-		}
-		.card-body .btn-outline-primary:hover {
-		  background-color: #f1491c;
-		  color: white;
-		}
-	  </style>
+	<!-- Новий стиль карток -->
+<style>
+.card {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(6px);
+  border: 1px solid #f0f0f0;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease-out;
+}
+
+.card.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+}
+
+.card-img-top {
+  background: transparent !important;
+  border-bottom: 1px solid #eee;
+  padding: 20px;
+  object-fit: contain;
+  height: 220px;
+}
+
+.card-body {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(2px);
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.card-title {
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.card-text {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 1rem;
+  min-height: 60px;
+}
+
+.card-body .fw-bold {
+  color: #f1491c !important;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.card-body .btn-outline-primary {
+  border-color: #f1491c;
+  color: #f1491c;
+  border-radius: 25px;
+  padding: 8px 20px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.card-body .btn-outline-primary:hover {
+  background-color: #f1491c;
+  color: white;
+}
+</style>
+
+<!-- Скрипт для анімації появи карток -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const cards = document.querySelectorAll('.card');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('show');
+      }
+    });
+  }, {
+    threshold: 0.2
+  });
+
+  cards.forEach(card => {
+    observer.observe(card);
+  });
+});
+</script>
+
 	<div class="container">
 	  <div class="section-title text-center">
 		<h2>Naše nabídka pizz</h2>
@@ -339,7 +404,7 @@
 	{
 	  title: "Žádné maso",
 	  items: [
-		{ name: "Margherita", price: "180 Kč", desc: "Omáčka Pronto, mozzarella Buona Diate, bazalka", img: "./images/yuma/margarita-removebg-preview.png" },
+		{ name: "Margherita", price: "180 Kč", desc: "Omáčka Pronto, mozzarella Buona Diate, bazalka", img: "./images/yuma/Margherita-Photoroom (1).png" },
 		{ name: "Quattro Formaggi", price: "240 Kč", desc: "Smetanový základ, mozzarella, cheddar, gorgonzola, parmazán, bazalka", img: "./images/yuma/Pizza_Quatro_Formaggi__4syry_-removebg-preview.png" }
 	  ]
 	},
@@ -544,96 +609,6 @@ let cart = JSON.parse(localStorage.getItem("cart")) || [];
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/animation.js"></script>
 	<script src="js/yuma.js"></script> 
-	<script>
-		const container = document.getElementById('background-pattern');
-		const symbols = ['X', 'O'];
-	  
-		function createSymbol(x, y, type, delay) {
-		  const svgNS = 'http://www.w3.org/2000/svg';
-		  const svg = document.createElementNS(svgNS, 'svg');
-		  svg.setAttribute('class', 'symbol');
-		  svg.setAttribute('viewBox', '0 0 40 40');
-		  svg.style.position = 'absolute';
-		  svg.style.left = `${x}px`;
-		  svg.style.top = `${y}px`;
-		  svg.style.animation = `fadeInOut 6s ${delay}s infinite ease-in-out`;
-		  svg.style.opacity = 0;
-		  svg.style.width = '40px';
-		  svg.style.height = '40px';
-	  
-		  if (type === 'X') {
-			const line1 = document.createElementNS(svgNS, 'line');
-			line1.setAttribute('x1', '5');
-			line1.setAttribute('y1', '5');
-			line1.setAttribute('x2', '35');
-			line1.setAttribute('y2', '35');
-			line1.setAttribute('stroke', '#111');
-			line1.setAttribute('stroke-width', '6');
-	  
-			const line2 = document.createElementNS(svgNS, 'line');
-			line2.setAttribute('x1', '35');
-			line2.setAttribute('y1', '5');
-			line2.setAttribute('x2', '5');
-			line2.setAttribute('y2', '35');
-			line2.setAttribute('stroke', '#111');
-			line2.setAttribute('stroke-width', '6');
-	  
-			svg.appendChild(line1);
-			svg.appendChild(line2);
-		  } else {
-			const circle = document.createElementNS(svgNS, 'circle');
-			circle.setAttribute('cx', '20');
-			circle.setAttribute('cy', '20');
-			circle.setAttribute('r', '15');
-			circle.setAttribute('stroke', '#111');
-			circle.setAttribute('stroke-width', '6');
-			circle.setAttribute('fill', 'none');
-			svg.appendChild(circle);
-		  }
-	  
-		  container.appendChild(svg);
-		}
-	  
-		function fillScreenWithSymbols() {
-		  const width = window.innerWidth;
-		  const height = document.body.scrollHeight;
-	  
-		  container.innerHTML = '';
-		  container.style.width = `${width}px`;
-		  container.style.height = `${height}px`;
-	  
-		  for (let i = 0; i < 80; i++) {
-			const x = Math.random() * width;
-			const y = Math.random() * height;
-			const type = symbols[Math.floor(Math.random() * symbols.length)];
-			const delay = Math.random() * 6;
-			createSymbol(x, y, type, delay);
-		  }
-		}
-	  
-		fillScreenWithSymbols();
-		window.addEventListener('resize', fillScreenWithSymbols);
-	  </script>
-	  
-	  <style>
-		@keyframes fadeInOut {
-		  0% { opacity: 0; }
-		  25% { opacity: 0.3; }
-		  50% { opacity: 0.5; }
-		  75% { opacity: 0.3; }
-		  100% { opacity: 0; }
-		}
-	  </style>
-<script>
-	document.addEventListener('DOMContentLoaded', function () {
-	  const menuToggle = document.querySelector('.menu-toggle');
-	  const menu = document.querySelector('.menu');
-  
-	  menuToggle.addEventListener('click', function () {
-		menu.classList.toggle('active');
-	  });
-	});
-  </script>
-	  
+	
 </body>
 </html>
