@@ -59,13 +59,14 @@
       transform: translateY(-8px) scale(1.02);
       box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
     }
-    .card-img-top {
-      background: transparent !important;
-      border-bottom: 1px solid #eee;
-      padding: 20px;
-      object-fit: contain;
-      height: 220px;
-    }
+	.card-img-top {
+  background: transparent !important;
+  border-bottom: 1px solid #eee;
+  padding: 20px;
+  object-fit: cover; /* Замість contain */
+  height: 500px; /* Збільшено */
+  width: 100%;
+}
     .card-body {
       background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(2px);
@@ -113,152 +114,114 @@
     </div>
   </div>
 
-  <!-- Header -->
-
+    <!-- Header Start -->
 	<header>
-     
 		<div class="container-big">
-			<div class="header-inner">
-			  <div class="row align-items-center">
-				<div class="col-xl-3 col-lg-3 col-md-3 col-5">
-				  <div class="header-logo">
-					<a href="index.html"
-					  ><img src="./images/yuma/logo.svg" alt="Brand Logo"
-					/></a>
-				  </div>
+		  <div class="header-inner">
+			<div class="row align-items-center">
+			  <div class="col-xl-3 col-lg-3 col-md-3 col-5">
+				<div class="header-logo">
+				  <a href="index.html"><img src="./images/yuma/logo.svg" alt="Brand Logo" /></a>
 				</div>
-				<div class="col-xl-9 col-lg-9 col-md-9 col-7">
-				  <div class="main-menu">
-					<div class="menu-toggle">
-					  <span></span>
-					</div>
-					<div class="menu">
-					  <div class="sidemenu-header">
-						<div class="sidemenu-logo">
-						  <img src="./images/yuma/logo.svg" alt="Brand Logo" />
-						</div>
-						<div class="sidemenu-close">
-						  <span></span>
-						</div>
+			  </div>
+			  <div class="col-xl-9 col-lg-9 col-md-9 col-7">
+				<div class="main-menu">
+				  <div class="menu-toggle"><span></span></div>
+				  <div class="menu">
+					<div class="sidemenu-header">
+					  <div class="sidemenu-logo">
+						<img src="./images/yuma/logo.svg" alt="Brand Logo" />
 					  </div>
-					  <ul>
-						<li ><a href="index.html">Domů</a></li>
-						<li>
-						  <span class="opener"></span>
-						  <a class="active" href="javascript:void(0)">Menu</a>
-						  <ul class="dropdown-content">
-							<li><a href="shop-list.html">Pizza</a></li>
-							<li><a href=sushi.html>Sushi</a></li>
-							<li><a href="napoje.html">Nápoje</a></li>
-							<li><a href="neco-navic.html">Něco navíc</a></li>
-						  </ul>
-						</li>
-						<li>
-						  <span class="opener"></span>
-						  <a href="javascript:void(0)">Novinky</a>
-						  <ul class="dropdown-content">
-							  <li><a href="novinky.html">Nové pizzy v nabídce</a></li>
-							  <li><a href="akce.html">Akční nabídky a slevy</a></li>
-							  <li><a href="our-team.html">Ze zákulisí pece</a></li>
-							  <li><a href="pizza-mesice.html">Pizza měsíce</a></li>
-							  <li><a href="hodnocení.html">Řekli jste o nás</a></li>
-						  </ul>
-						</li>
-						<li>
-						  <span class="opener"></span>
-						  <a href="javascript:void(0)">O nás</a>
-						  <ul class="dropdown-content">
-							<li><a href="blog-right.html">Naše příběh</a></li>
-							<li><a href="blog-left.html">Náš tým</a></li>
-							<li><a href="blog-detail.html">Naše hodnoty</a></li>
-						  </ul>
-						</li>
-						<li><a href="contact-us.html">Kontakt</a></li>
-					  </ul>
+					  <div class="sidemenu-close"><span></span></div>
 					</div>
-					<div class="icon-menu">
-					  <ul>
-						<li class="search">
-						  <a href="javascript:void(0)">
-							<img
-							  src="images/search-icon.png"
-							  class="normal-icon"
-							  alt="Search Icon"
-							/>
-							<img
-							  src="images/search-icon-2.png"
-							  class="hover-icon"
-							  alt="Search Icon"
-							/>
-						  </a>
-						</li>
-						<li class="cart-slide position-r">
-						   <a href="cart.html">
-							<img
-							  src="images/cart-icon.png"
-							  class="normal-icon"
-							  alt="Cart Icon"
-							/>
-							<img
-							  src="images/cart-icon-2.png"
-							  class="hover-icon"
-							  alt="Cart Icon"
-							/>
-							<span class="cart-count">0</span>
-						  </a>
-						</li>
-					  </ul>
-					</div>
+					<ul>
+					  <li><a href="index.html">Domů</a></li>
+					  <li><span class="opener"></span><a class="active" href="javascript:void(0)">Menu</a>
+						<ul class="dropdown-content">
+						  <li><a href="shop-list.html">Pizza</a></li>
+						  <li><a href="sushi.html">Sushi</a></li>
+						  <li><a href="napoje.html">Nápoje</a></li>
+						  <li><a href="neco-navic.html">Něco navíc</a></li>
+						</ul>
+					  </li>
+					  <li><span class="opener"></span><a href="javascript:void(0)">Novinky</a>
+						<ul class="dropdown-content">
+						  <li><a href="novinky.html">Nové pizzy v nabídce</a></li>
+						  <li><a href="akce.html">Akční nabídky a slevy</a></li>
+						  <li><a href="our-team.html">Ze zákulisí pece</a></li>
+						  <li><a href="pizza-mesice.html">Pizza měsíce</a></li>
+						  <li><a href="hodnocení.html">Řekli jste o nás</a></li>
+						</ul>
+					  </li>
+					  <li><span class="opener"></span><a href="javascript:void(0)">O nás</a>
+						<ul class="dropdown-content">
+						  <li><a href="blog-right.html">Naše příběh</a></li>
+						  <li><a href="blog-left.html">Náš tým</a></li>
+						  <li><a href="blog-detail.html">Naše hodnoty</a></li>
+						</ul>
+					  </li>
+					  <li><a href="contact-us.html">Kontakt</a></li>
+					</ul>
+				  </div>
+				  <div class="icon-menu">
+					<ul>
+					  <li class="search">
+						<a href="javascript:void(0)">
+						  <img src="images/search-icon.png" class="normal-icon" alt="Search Icon" />
+						  <img src="images/search-icon-2.png" class="hover-icon" alt="Search Icon" />
+						</a>
+					  </li>
+					  <li class="cart-slide position-r">
+						<a href="cart.html">
+						  <img src="images/cart-icon.png" class="normal-icon" alt="Cart Icon" />
+						  <img src="images/cart-icon-2.png" class="hover-icon" alt="Cart Icon" />
+						  <span class="cart-count">0</span>
+						</a>
+					  </li>
+					</ul>
 				  </div>
 				</div>
 			  </div>
 			</div>
 		  </div>
-		</header>
-	<!-- Header End -->
-
+		</div>
+	  </header>
+	  <!-- Header End -->
+	
+	  <!-- Sub Banner Start -->
+	  <section class="sub-banner bg-yellow overflow-h position-r">
+		<div class="container">
+		  <div class="row align-items-center">
+			<div class="col-xl-6 col-lg-6 col-md-12">
+			  <div class="sub-banner-content wow fadeInLeft">
+				<h1 class="sub-banner-title">YU-MA <span class="sub-banner-title2">pizza</span></h1>
+				<p>“Nezastavuj se u jedné – naše pizzy chtějí být ochutnány všechny!“</p>
+			  </div>
+			</div>
+			<div class="col-xl-6 col-lg-6 col-md-12">
+			  <div class="bread-crumb wow fadeInRight">
+				<ul>
+				  <li><a href="index.html">Domů</a></li>
+				  <li>Pizza</li>
+				</ul>
+			  </div>
+			</div>
+		  </div>
+		</div>
+		<div class="black-jamun wow fadeInLeft animation-delay-5">
+		  <img src="./images/yuma/hra.png" alt="black-jamun">
+		</div>
+	
+		<div class="leaf-img wow fadeInRight animation-delay-8">
+		  <img src="images/banner-leaf.png" alt="banner-leaf">
+		</div>
+	  </section>
+	  <!-- Sub Banner End -->
 
 	<!-- Start Of Main Div -->
 	<main>
 
-		<!-- Start Of Sub Banner -->
-		<section class="sub-banner bg-yellow overflow-h position-r">
-			<div class="container">
-				<div class="row align-items-center">
-					<div class="col-xl-6 col-lg-6 col-md-12">
-						<div class="sub-banner-content wow fadeInLeft">
-							<h1 class="sub-banner-title">YU-MA <span class="sub-banner-title2">pizza</span></h1>
-							<p>Nezastavuj se u jedné – naše pizzy chtějí být ochutnány všechny!“</p>
-						</div>
-					</div>
 
-					<div class="col-xl-6 col-lg-6 col-md-12">
-						<div class="bread-crumb wow fadeInRight">
-							<ul>
-								<li><a href="index.html">Domů</a></li>
-								<li>Pizza</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="black-jamun wow fadeInLeft animation-delay-5">
-				<img src="./images/yuma/hra.png" alt="black-jamun">
-			</div>
-
-
-
-			<div class="leaf-img wow fadeInRight animation-delay-8">
-				<img src="images/banner-leaf.png" alt="banner-leaf">
-			</div>
-			<div class="wave-divider">
-				<svg viewBox="0 0 1440 150" preserveAspectRatio="none" style="width:100%; height: 100px;">
-				  <path d="M0,0 C480,150 960,0 1440,150 L1440,0 L0,0 Z" fill="#ffffff"></path>
-				</svg>
-			  </div>
-		</section>
-		<!-- End Of Sub Banner -->
 
 <!-- Start Pizza Menu Section -->
 <section class="section-padding position-relative" id="pizza-menu">
@@ -409,7 +372,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	{
 	  title: "Žádné maso",
 	  items: [
-		{ name: "Margherita", price: "180 Kč", desc: "Omáčka Pronto, mozzarella Buona Diate, bazalka", img: "./images/yuma/Margherita-Photoroom (1).png" },
+		{ name: "Margherita", price: "180 Kč", desc: "Omáčka Pronto, mozzarella Buona Diate, bazalka", img: "./images/yuma/margarita-removebg-preview.png" },
 		{ name: "Quattro Formaggi", price: "240 Kč", desc: "Smetanový základ, mozzarella, cheddar, gorgonzola, parmazán, bazalka", img: "./images/yuma/Pizza_Quatro_Formaggi__4syry_-removebg-preview.png" }
 	  ]
 	},
@@ -523,8 +486,8 @@ let cart = JSON.parse(localStorage.getItem("cart")) || [];
 	<!-- End Of Main Div -->
 
 
-	<!-- Start Of Footer -->
-	<footer>
+    <!-- Start Of Footer -->
+    <footer>
 		<div class="footer ptb-100 bg-yellow position-r overflow-h">
 		  <div class="footer-pattern-1 wow fadeInLeft animation-delay-5">
 			<img src="./images/yuma/logo.svg" alt="logo" />
@@ -581,14 +544,15 @@ let cart = JSON.parse(localStorage.getItem("cart")) || [];
 					  </a>
 					</li>
 					<li>
-					  <a href="#" class="instagram">
+					  <a href="https://www.instagram.com/yuma_pizza_cz?igsh=ajE1bWg1c21oNWJ4" class="instagram">
 						<i class="fa fa-instagram" aria-hidden="true"></i>
 					  </a>
 					</li>
 					<li>
-					  <a href="#" class="tiktok">
-						<i class="fab fa-tiktok" aria-hidden="true"></i>
-						<span class="visually-hidden">TikTok</span>
+						<a href="https://www.tiktok.com/@yuma_pizza_?_t=ZM-8vcNNenySM3&_r=1" class="tiktok" target="_blank">
+							<img src="./images/yuma/tiktok-icon-white-1-logo-svgrepo-com.svg" alt="TikTok" width="20" />
+							
+						  </a>
 					  </a>
 					</li>
 				  </ul>
@@ -606,7 +570,7 @@ let cart = JSON.parse(localStorage.getItem("cart")) || [];
 		  </div>
 		</div>
 	  </footer>
-	<!-- End Of Footer -->
+	  <!-- End Of Footer -->
 
 
 	<!-- Start Of Js -->

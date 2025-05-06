@@ -4,9 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>YU-MA Nápoje</title>
+  <link type="image/x-icon" href="./images/yuma/favicon.svg" rel="icon">
+  <link rel="stylesheet" href="css/font-awesome.min.css" />
   <link rel="stylesheet" href="css/bootstrap.min.css" />
   <link rel="stylesheet" href="css/style.css" />
-  <link rel="stylesheet" href="css/font-awesome.min.css" />
+
+  <!-- Стилі для карток анімації -->
   <style>
     .card-img-top {
       height: 240px;
@@ -14,9 +17,100 @@
       background-color: #fff5e6;
       padding: 10px;
     }
+
+    .card {
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.card .btn {
+  border-radius: 30px;
+  margin-top: 15px;
+  padding: 10px 28px;
+  background-color: #777;
+  color: #333;
+  border: none;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.card .btn:hover {
+  background-color: #dc4a38;
+  color: #fff;
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(255, 165, 0, 0.4);
+}
+
+.card .btn:active {
+  transform: scale(0.95);
+}
+
+    .card.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center; /* Центрує все по горизонталі */
+  text-align: center;  /* Центрує текст */
+  height: 100%;
+  padding: 20px;
+}
+
+    /* Стилі для хрестиків і нуликів */
+    .tictactoe-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .tictactoe-icon {
+      position: absolute;
+      font-size: 50px;
+      opacity: 0.15;
+      animation: moveUp 20s linear infinite;
+      user-select: none;
+    }
+
+    .tictactoe-icon.x { color: black; }
+    .tictactoe-icon.o { color: orange; }
+
+    @keyframes moveUp {
+      0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.2;
+      }
+      90% {
+        opacity: 0.2;
+      }
+      100% {
+        transform: translateY(-10vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
   </style>
 </head>
+
 <body>
+  <div class="tictactoe-background" id="tictactoe-bg"></div>
   <!-- Прелоадер -->
   <div id="preloader" class="preloader">
     <div class="preloader-box">
@@ -121,76 +215,101 @@
     <div class="black-jamun wow fadeInLeft animation-delay-5">
       <img src="./images/yuma/hra.png" alt="black-jamun">
     </div>
-    <div class="onion-img wow fadeInUp animation-delay-6">
-      <img src="images/onion.png" alt="onion">
-    </div>
-    <div class="tamato-img wow fadeInUp animation-delay-7">
-      <img src="images/tamato.png" alt="tamato">
-    </div>
+
     <div class="leaf-img wow fadeInRight animation-delay-8">
       <img src="images/banner-leaf.png" alt="banner-leaf">
     </div>
   </section>
   <!-- Sub Banner End -->
-
   <main class="container my-5">
     <div id="menu-sections"></div>
   </main>
 
-  <!-- Footer Start -->
-  <footer>
-    <div class="footer ptb-100 bg-yellow position-r overflow-h">
-      <div class="footer-pattern-1 wow fadeInLeft animation-delay-5">
+    <!-- Start Of Footer -->
+    <footer>
+      <div class="footer ptb-100 bg-yellow position-r overflow-h">
+        <div class="footer-pattern-1 wow fadeInLeft animation-delay-5">
         <img src="./images/yuma/logo.svg" alt="logo" />
-      </div>
-      <div class="footer-pattern-2 wow fadeInRight animation-delay-5">
+        </div>
+        <div class="footer-pattern-2 wow fadeInRight animation-delay-5">
         <img src="./images/yuma/hra.png" alt="footer-pattern" />
-      </div>
-      <div class="container">
+        </div>
+        <div class="container">
         <div class="row">
           <div class="col-xl-3 col-lg-6 col-md-6 footer-box wow fadeInUp">
-            <h6 class="footer-title text-uppercase">Informace</h6>
-            <ul class="footer-menu">
-              <li><a href="index.html">Domů</a></li>
-              <li><a href="blog-left.html">Menu</a></li>
-              <li><a href="about.html">Novinky</a></li>
-              <li><a href="our-menu.html">O nas</a></li>
-            </ul>
+          <h6 class="footer-title text-uppercase">Informace</h6>
+          <ul class="footer-menu">
+            <li><a href="index.html">Domů</a></li>
+            <li><a href="blog-left.html">Menu</a></li>
+            <li><a href="about.html">Novinky</a></li>
+            <li><a href="our-menu.html">O nas</a></li>
+          </ul>
           </div>
           <div class="col-xl-3 col-lg-6 col-md-6 footer-box wow fadeInUp">
-            <h6 class="footer-title text-uppercase">Kontakt</h6>
-            <ul class="footer-menu">
-              <li><a>Adresa</a></li>
-              <li><a class="footer-map-link" href="https://www.google.com/maps/place/Přátelství+180,+104+00+Praha+22-Uhříněves" target="_blank" rel="noopener noreferrer">Přátelství 180<br />104 00 Praha 22 – Uhříněves</a></li>
-              <li><a class="link mobile-menu-phone-link" href="tel:+420776800436">+420606250600</a></li>
-            </ul>
+          <h6 class="footer-title text-uppercase">Kontakt</h6>
+          <ul class="footer-menu">
+            <li><a>Adresa</a></li>
+            <li><a
+              class="footer-map-link"
+              href="https://www.google.com/maps/place/Přátelství+180,+104+00+Praha+22-Uhříněves"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Přátelství 180<br />
+              104 00 Praha 22 – Uhříněves
+            </a></li>
+            <li> <a class="link mobile-menu-phone-link" href="tel:+420776800436"
+              >+420606250600</a></li>
+          </ul>
           </div>
           <div class="col-xl-3 col-lg-6 col-md-6 footer-box wow fadeInUp">
-            <h6 class="footer-title text-uppercase">Otevírací doba</h6>
-            <ul class="footer-menu">
-              <li><a>Po - Ne 10:00-22:00</a></li>
-            </ul>
+          <h6 class="footer-title text-uppercase">Otevírací doba</h6>
+          <ul class="footer-menu">
+            <li><a>Po    10:00-22:00</a></li>
+            <li><a>Út    10:00-22:00</a></li>
+            <li><a>St    10:00-22:00</a></li>
+            <li><a>Čt    10:00-22:00</a></li>
+            <li><a>Pá    10:00-22:00</a></li>
+            <li><a>So    10:00-22:00</a></li>
+            <li><a>Ne    10:00-22:00</a></li>
+          </ul>
           </div>
           <div class="col-xl-3 col-lg-6 col-md-6 footer-box wow fadeInUp">
-            <h6 class="footer-title text-uppercase">Sledujte nás</h6>
+            <h6 class="footer-title text-uppercase">Sledujte nás na sociálních sítích</h6>
             <ul class="footer-social">
-              <li><a href="#" class="facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-              <li><a href="#" class="instagram"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-              <li><a href="#" class="tiktok"><i class="fab fa-tiktok" aria-hidden="true"></i></a></li>
+            <li>
+              <a href="#" class="facebook">
+              <i class="fa fa-facebook" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.instagram.com/yuma_pizza_cz?igsh=ajE1bWg1c21oNWJ4" class="instagram">
+              <i class="fa fa-instagram" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.tiktok.com/@yuma_pizza_?_t=ZM-8vcNNenySM3&_r=1" class="tiktok" target="_blank">
+                <img src="./images/yuma/tiktok-icon-white-1-logo-svgrepo-com.svg" alt="TikTok" width="20" />
+                
+                </a>
+              </a>
+            </li>
             </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="copyright">
-      <div class="container">
+            
+          
+          
+      <div class="copyright">
+        <div class="container">
         <div class="text-center">
-          <p>&#169; Všechna práva vyhrazena společnosti YU-MA Pizza © 2025 <a href="#">Templatescoder</a></p>
+          <p>
+          &#169; Všechna práva vyhrazena společnosti YU-MA Pizza © 2025
+          <a href="#">Templatescoder</a>
+          </p>
+        </div>
         </div>
       </div>
-    </div>
-  </footer>
-  <!-- Footer End -->
+      </footer>
+      <!-- End Of Footer -->
   <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -217,150 +336,174 @@
   </div>
 
   <!-- Скрипт -->
+  <script src="js/jquery-3.4.1.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/animation.js"></script>
+  <script src="js/owl.carousel.min.js"></script>
+  <script src="js/yuma.js"></script>
+
   <script>
-const drinkCategories = [
+  // Хрестики та нулики анімація
+  const tttContainer = document.getElementById("tictactoe-bg");
+
+  function createTicTacToeSymbol() {
+    const el = document.createElement("div");
+    el.className = "tictactoe-icon " + (Math.random() > 0.5 ? "x" : "o");
+    el.textContent = el.classList.contains("x") ? "×" : "◯";
+    el.style.left = Math.random() * 100 + "vw";
+    el.style.top = Math.random() * 100 + "vh";
+    el.style.fontSize = (Math.random() * 40 + 30) + "px";
+    el.style.animationDuration = (Math.random() * 10 + 15) + "s";
+    tttContainer.appendChild(el);
+    setTimeout(() => el.remove(), 20000);
+  }
+  setInterval(createTicTacToeSymbol, 300);
+
+   
+  const drinkCategories = [
   {
-    title: "Minerální voda",
+    title: "Pivo",
     items: [
-      {
-        name: "Mattoni jemná",
-        price: "25 Kč",
-        desc: "Přírodní minerální voda jemně perlivá",
-        img: "./images/yuma/matoni.png"
-      }
-    ]
-  },
-  {
-    title: "Nealkoholické pivo",
-    items: [
-      {
-        name: "Birell Pomelo & grep",
-        price: "30 Kč",
-        desc: "Ovocné osvěžení bez alkoholu",
-        img: "./images/yuma/birell ovoc.png"
-      },
-      {
-        name: "Birell Světlý",
-        price: "28 Kč",
-        desc: "Tradiční nealkoholické pivo",
-        img: "./images/yuma/birell.png"
-      }
-    ]
-  },
-  {
-    title: "Energetické nápoje",
-    items: [
-      {
-        name: "Red Bull",
-        price: "45 Kč",
-        desc: "Dodá ti křídla – klasická energie",
-        img: "./images/yuma/redbul.png"
-      }
-    ]
-  },
-  {
-    title: "Džusy a ovocné nápoje",
-    items: [
-      {
-        name: "Relax pomeranč",
-        price: "35 Kč",
-        desc: "100% pomerančový džus – zdroj vitamínu C",
-        img: "./images/yuma/relax.png"
-      },
-      {
-        name: "Capri-Sun multivitamin",
-        price: "25 Kč",
-        desc: "Multivitamínový ovocný nápoj",
-        img: "./images/yuma/caprisun.png"
-      }
+      { name: "Pilsner Urquell", price: "35 Kč", desc: "Originální český ležák", img: "./images/yuma/" },
+      { name: "Budvar", price: "33 Kč", desc: "Tradiční české pivo", img: "./images/yuma/budvar.png" }
     ]
   },
   {
     title: "Limonády",
     items: [
-      {
-        name: "Fanta pomeranč",
-        price: "30 Kč",
-        desc: "Osvěžující pomerančová limonáda",
-        img: "./images/yuma/fanta.png"
-      },
-      {
-        name: "Coca-Cola Original",
-        price: "30 Kč",
-        desc: "Klasický nápoj s kofeinem",
-        img: "./images/yuma/cola.png"
-      }
+      { name: "Coca-Cola Original", price: "30 Kč", desc: "Klasická Cola s kofeinem", img: "./images/yuma/cola.png" },
+      { name: "Coca-Cola Zero", price: "30 Kč", desc: "Bez cukru, plná chuti", img: "./images/yuma/cola.png" },
+      { name: "Fanta Orange", price: "30 Kč", desc: "Pomerančová limonáda plná chuti", img: "./images/yuma/fanta.png" }
     ]
   },
   {
-    title: "Pivo",
+    title: "Minerální voda",
     items: [
-      {
-        name: "Svijany Máz",
-        price: "32 Kč",
-        desc: "Tradiční nepasterizovaný světlý ležák",
-        img: "./images/yuma/svijany.png"
-      }
+      { name: "Mattoni jemně perlivá", price: "25 Kč", desc: "Přírodní minerálka – jemně perlivá", img: "./images/yuma/matoni.png" },
+      { name: "Mattoni perlivá", price: "25 Kč", desc: "Klasická minerálka s bublinkami", img: "./images/yuma/matoni.png" },
+      { name: "Mattoni neperlivá", price: "25 Kč", desc: "Přírodní minerální voda bez bublinek", img: "./images/yuma/matoni.png" }
+    ]
+  },
+  {
+    title: "Džusy a ovocné nápoje",
+    items: [
+      { name: "Capri-Sun Multivitamin", price: "25 Kč", desc: "Ovocný multivitamínový nápoj", img: "./images/yuma/caprisun.png" },
     ]
   }
 ];
 
 
     const menuSections = document.getElementById("menu-sections");
-    const cartItemsList = document.getElementById("cart-items");
-    const cartCount = document.querySelector(".cart-count");
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const cartItemsList = document.getElementById("cart-items");
+  const cartCount = document.querySelector(".cart-count");
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-    function renderCart() {
-      cartItemsList.innerHTML = "";
-      cart.forEach((item, index) => {
-        const li = document.createElement("li");
-        li.className = "list-group-item d-flex justify-content-between align-items-center";
-        li.innerHTML = `${item.name} - ${item.price} <button class='btn btn-sm btn-danger' onclick='removeFromCart(${index})'>&times;</button>`;
-        cartItemsList.appendChild(li);
+  function renderCart() {
+    cartItemsList.innerHTML = "";
+    cart.forEach((item, index) => {
+      const li = document.createElement("li");
+      li.className = "list-group-item d-flex justify-content-between align-items-center";
+      li.innerHTML = `${item.name} - ${item.price} <button class='btn btn-sm btn-danger' onclick='removeFromCart(${index})'>&times;</button>`;
+      cartItemsList.appendChild(li);
+    });
+    cartCount.textContent = cart.length;
+  }
+
+  function removeFromCart(index) {
+    cart.splice(index, 1);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    renderCart();
+  }
+
+  function addToCart(name, price) {
+    cart.push({ name, price });
+    localStorage.setItem("cart", JSON.stringify(cart));
+    renderCart();
+  }
+
+  function setupCardsObserver() {
+    const cards = document.querySelectorAll('.card');
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+        }
       });
-      cartCount.textContent = cart.length;
-    }
-
-    function removeFromCart(index) {
-      cart.splice(index, 1);
-      localStorage.setItem("cart", JSON.stringify(cart));
-      renderCart();
-    }
-
-    function addToCart(name, price) {
-      cart.push({ name, price });
-      localStorage.setItem("cart", JSON.stringify(cart));
-      renderCart();
-    }
-
-    drinkCategories.forEach((section) => {
-      const sectionDiv = document.createElement("div");
-      sectionDiv.className = "mb-5";
-      sectionDiv.innerHTML = `<h3 class="mb-4 text-center">${section.title}</h3><div class="row"></div>`;
-      const row = sectionDiv.querySelector(".row");
-
-      section.items.forEach(drink => {
-        const col = document.createElement("div");
-        col.className = "col-lg-4 col-md-6 mb-4";
-        col.innerHTML = `
-          <div class="card h-100">
-            <img src="${drink.img}" class="card-img-top" alt="${drink.name}" />
-            <div class="card-body">
-              <h5 class="card-title">${drink.name}</h5>
-              <p class="card-text">${drink.desc}</p>
-              <p class="fw-bold">${drink.price}</p>
-              <button class="btn btn-outline-primary" onclick="addToCart('${drink.name}', '${drink.price}')">Přidat do košíku</button>
-            </div>
-          </div>
-        `;
-        row.appendChild(col);
-      });
-
-      menuSections.appendChild(sectionDiv);
+    }, {
+      threshold: 0.2
     });
 
+    cards.forEach(card => {
+      observer.observe(card);
+    });
+  }
+
+  function renderMenu() {
+  drinkCategories.forEach((section) => {
+    const sectionDiv = document.createElement("div");
+    sectionDiv.className = "mb-5";
+    sectionDiv.innerHTML = `<h3 class="mb-4 text-center">${section.title}</h3><div class="row"></div>`;
+    const row = sectionDiv.querySelector(".row");
+
+    section.items.forEach(drink => {
+      const col = document.createElement("div");
+      col.className = "col-lg-4 col-md-6 mb-4";
+
+      const card = document.createElement("div");
+      card.className = "card h-100";
+
+      const img = document.createElement("img");
+      img.src = drink.img;
+      img.alt = drink.name;
+      img.className = "card-img-top";
+
+      const cardBody = document.createElement("div");
+      cardBody.className = "card-body";
+
+      const title = document.createElement("h5");
+      title.className = "card-title";
+      title.textContent = drink.name;
+
+      const desc = document.createElement("p");
+      desc.className = "card-text";
+      desc.textContent = drink.desc;
+
+      const price = document.createElement("p");
+      price.className = "fw-bold";
+      price.textContent = drink.price;
+
+      const button = document.createElement("button");
+      button.className = "btn btn-outline-primary";
+      button.textContent = "Přidat do košíku";
+      button.dataset.name = drink.name;
+      button.dataset.price = drink.price;
+      button.addEventListener("click", function () {
+        addToCart(this.dataset.name, this.dataset.price);
+      });
+
+      // Збираємо все до купи
+      cardBody.appendChild(title);
+      cardBody.appendChild(desc);
+      cardBody.appendChild(price);
+      cardBody.appendChild(button);
+
+      card.appendChild(img);
+      card.appendChild(cardBody);
+
+      col.appendChild(card);
+      row.appendChild(col);
+    });
+
+    menuSections.appendChild(sectionDiv);
+  });
+}
+
+  // ⬇️ ОБОВ'ЯЗКОВО через DOMContentLoaded
+  document.addEventListener('DOMContentLoaded', function() {
+    renderMenu();
     renderCart();
+    setupCardsObserver();
 
     document.getElementById("cartOrderForm").addEventListener("submit", function (e) {
       e.preventDefault();
@@ -369,6 +512,7 @@ const drinkCategories = [
       cart.length = 0;
       renderCart();
     });
-  </script>
+  });
+</script>
 </body>
 </html>

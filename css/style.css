@@ -3375,8 +3375,10 @@ h4 {
   padding: 0;
   margin: 0;
   font-weight: 700;
-  color: #fff;
+  color: #777777;
 }
+
+
 .main {
   margin-top: 210px;
 }
@@ -4719,12 +4721,6 @@ _______________________________________________________*/
   z-index: 1;
 }
 
-.animated .home-img-1 img {
-  max-width: 100%;
-  width: 100%;
-  height: auto;
-}
-
 .slider-round {
   width: 100%;
   background: #f1491c;
@@ -4898,8 +4894,8 @@ _______________________________________________________*/
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  min-height: 800px;
-  max-height: 800px;
+  min-height: 500px;
+  max-height: 500px;
   padding: 30px 50px 50px 50px;
   border: 1px solid #e4ded9;
   border-radius: 30px;
@@ -8392,3 +8388,45 @@ select.form-control:focus {
 
 
 
+.tictactoe-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1; /* ВАЖЛИВО: має бути нижче за контент */
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.tictactoe-icon {
+  position: absolute;
+  font-size: 50px; /* Збільшив розмір */
+  opacity: 0.15; /* Більше видно */
+  animation: moveUp 20s linear infinite;
+  user-select: none;
+}
+
+.tictactoe-icon.o { color: #dc4a38; }
+.tictactoe-icon.x { color: black; }
+
+@keyframes moveUp {
+  0% {
+    transform: translateY(100vh) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.2;
+  }
+  90% {
+    opacity: 0.2;
+  }
+  100% {
+    transform: translateY(-10vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.tiktok {
+  background-color: #ccc;
+}
