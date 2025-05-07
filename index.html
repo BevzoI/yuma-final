@@ -204,6 +204,7 @@
             <h5 class="sub-title">Co nabízíme</h5>
             <h2>Zde jsou naše nejoblíbenější položky menu.
         </div>
+        <div class="custom-owl-nav"></div>
         <div class="wow fadeInLeft">
           <div class="our-menu-content right-padding">
             <div class="menu-slider owl-carousel">
@@ -754,6 +755,7 @@
           <h5 class="sub-title">Co nabízíme</h5>
           <h2>Něco jiného.</h2>
         </div>
+        <div class="custom-owl-nav"></div>
         <div class="wow fadeInLeft">
           <div class="our-menu-content right-padding">
             <div class="menu-slider owl-carousel">
@@ -1859,6 +1861,43 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 </script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+<script>
+  $(document).ready(function () {
+    const owl = $(".menu-slider");
+
+    owl.owlCarousel({
+      items: 1,
+      margin: 30,
+      loop: true,
+      nav: true,
+      dots: false,
+      navText: [
+        "<i class='fa fa-arrow-left'></i>",
+        "<i class='fa fa-arrow-right'></i>"
+      ],
+      responsive: {
+        0: { items: 1 },
+        768: { items: 2 },
+        992: { items: 3 }
+      },
+      onInitialized: moveMobileNav
+    });
+
+    function moveMobileNav() {
+      if (window.innerWidth <= 767) {
+        setTimeout(function () {
+          const nav = $('.menu-slider .owl-nav');
+          if (nav.length) {
+            $('.custom-owl-nav').html(nav);
+          }
+        }, 100); // трішки зачекати, поки owl створить стрілки
+      }
+    }
+  });
+</script>
+
 
   </body>
 </html>

@@ -7681,3 +7681,71 @@ header .menu-toggle {
     height: auto;
   }
 }
+/* Приховуємо цей блок на великих екранах */
+.custom-owl-nav {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .custom-owl-nav {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin: 10px 0 20px;
+  }
+
+  .custom-owl-nav .owl-prev,
+  .custom-owl-nav .owl-next {
+    background-color: #000;
+    color: #fff;
+    padding: 10px;
+    border-radius: 50%;
+    font-size: 18px;
+    cursor: pointer;
+  }
+
+  /* І стрілки всередині слайдера приховаємо */
+  .menu-slider .owl-nav {
+    display: none !important;
+  }
+}
+.custom-owl-nav {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .custom-owl-nav {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin: 12px 0;
+  }
+
+  .custom-owl-nav .owl-prev,
+  .custom-owl-nav .owl-next {
+    background-color: #000;
+    color: #fff;
+    padding: 10px;
+    border-radius: 50%;
+    font-size: 18px;
+    cursor: pointer;
+  }
+
+  .menu-slider .owl-nav {
+    display: none !important;
+  }
+}
+
+.menu-slider img {
+  max-width: 100px;
+}
+
+.menu-item-box {
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin: 10px;
+}
+
+.menu-item-title h5 {
+  margin: 0;
+}
