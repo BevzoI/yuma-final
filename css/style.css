@@ -3995,19 +3995,11 @@ display: flex;
   padding-bottom: 10px;
 }
 
-
 .menu-item-img img {
   width: 100%;
+  max-width: 280px;
   height: auto;
-  max-width: 250px; /* або 80–90% контейнера */
-  max-height: 100%;
   object-fit: contain;
-  transition: all 400ms ease;
-}
-
-.menu-item-img img {
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-  border-radius: 50%; /* якщо хочеш ефект круглої тіні */
 }
 
 .menu-item-title {
@@ -7754,4 +7746,146 @@ header .menu-toggle {
 
 .menu-item-title h5 {
   margin: 0;
+}
+
+/* ====== Pizza Menu Full Styles ====== */
+
+.menu-section {
+  margin-bottom: 80px;
+}
+
+.menu-section-heading {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.menu-section-heading h2 {
+  font-size: 42px;
+  font-weight: 700;
+}
+
+.menu-section-heading p {
+  color: #777;
+  font-size: 16px;
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+}
+
+.product-card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  text-align: center;
+  padding: 20px;
+  min-height: 430px;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+}
+
+.product-image {
+  width: 100%;
+  max-width: 220px;
+  height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.product-image img {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.product-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.product-desc {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 16px;
+  min-height: 50px;
+}
+
+.product-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: auto;
+  flex-wrap: wrap;
+}
+
+.product-price {
+  font-size: 16px;
+  font-weight: 600;
+  color: #f1491c;
+}
+
+.add-to-cart.btn-ct {
+  background-color: #f1491c;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 30px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: background 0.2s ease;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.add-to-cart.btn-ct:hover {
+  background-color: #cf3c14;
+}
+
+.add-to-cart img {
+  height: 16px;
+  width: auto;
+}
+
+@media (max-width: 1200px) {
+  .menu-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .menu-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .menu-grid {
+    grid-template-columns: 1fr;
+  }
+  .product-title {
+    font-size: 18px;
+  }
+  .product-desc {
+    font-size: 13px;
+  }
+  .product-price {
+    font-size: 15px;
+  }
 }
