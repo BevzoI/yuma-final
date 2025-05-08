@@ -3988,20 +3988,26 @@ display: flex;
 }
 
 .menu-item-img {
-height: 300px; /* обмеження контейнера */
+  height: 350px; /* або більше, але не менше 300px */
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-bottom: 20px;
-  text-align: center;
+  padding-bottom: 10px;
+}
+
+
+.menu-item-img img {
+  width: 100%;
+  height: auto;
+  max-width: 250px; /* або 80–90% контейнера */
+  max-height: 100%;
+  object-fit: contain;
+  transition: all 400ms ease;
 }
 
 .menu-item-img img {
-max-height: 100%;
-  width: auto;
-  height: auto;
-  object-fit: contain; /* дуже важливо: картинка пропорційно зменшується і не обрізається */
-  transition: all 400ms ease;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  border-radius: 50%; /* якщо хочеш ефект круглої тіні */
 }
 
 .menu-item-title {
