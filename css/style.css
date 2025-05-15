@@ -7797,7 +7797,7 @@ header .menu-toggle {
 }
 .product-image {
   width: 100%;
-  height: 240px;
+  height: 280px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -7822,7 +7822,7 @@ header .menu-toggle {
 
 /* Піци, які виглядають дрібніше — примусово збільшуємо */
 .product-image img.scale-up {
-  transform: scale(1.3); /* або 1.1–1.25, залежно від потреби */
+  transform: scale(1.5); /* або 1.1–1.25, залежно від потреби */
 }
 
 .product-image img:hover {
@@ -8037,5 +8037,122 @@ header .menu-toggle {
   /* Зменшити логотип */
   .header-logo img {
     max-width: 140px;
+  }
+}
+
+
+
+/* БУРГЕР-МЕНЮ — робить іконку видимою */
+@media (max-width: 991px) {
+  .menu-toggle {
+    display: block !important;
+    width: 30px;
+    height: 20px;
+    position: relative;
+    cursor: pointer;
+    z-index: 1001;
+  }
+
+  .menu-toggle span,
+  .menu-toggle span::before,
+  .menu-toggle span::after {
+    content: "";
+    display: block;
+    background: #000;
+    height: 3px;
+    width: 100%;
+    border-radius: 2px;
+    position: absolute;
+    transition: all 0.3s ease;
+  }
+
+  .menu-toggle span::before {
+    top: -8px;
+  }
+
+  .menu-toggle span::after {
+    bottom: -8px;
+  }
+
+  .main-menu .menu {
+    display: none;
+    position: absolute;
+    background: #fff;
+    width: 100%;
+    top: 100%;
+    left: 0;
+    padding: 20px;
+    z-index: 1000;
+  }
+
+  .main-menu .menu.menu-open {
+    display: block;
+  }
+
+  .main-menu .menu ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .icon-menu {
+    display: none;
+  }
+}
+
+
+
+/* ==== BURGER MENU ==== */
+.menu-toggle {
+  display: none;
+  width: 30px;
+  height: 25px;
+  position: relative;
+  cursor: pointer;
+  z-index: 1001;
+}
+.menu-toggle span,
+.menu-toggle span::before,
+.menu-toggle span::after {
+  content: "";
+  position: absolute;
+  height: 3px;
+  width: 100%;
+  background: #000;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+.menu-toggle span {
+  top: 50%;
+  transform: translateY(-50%);
+}
+.menu-toggle span::before {
+  top: -10px;
+}
+.menu-toggle span::after {
+  top: 10px;
+}
+@media (max-width: 991px) {
+  .menu-toggle {
+    display: block;
+  }
+  .main-menu .menu {
+    display: none;
+    width: 100%;
+    background: #fff;
+    padding: 15px 20px;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+  }
+  .main-menu .menu.menu-open {
+    display: block;
+  }
+  .main-menu > ul,
+  .main-menu .menu > ul {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 0;
+    gap: 10px;
   }
 }

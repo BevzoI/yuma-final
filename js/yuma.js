@@ -140,7 +140,9 @@ $(function() {
 
         // ***** Our Menu Slider Start ***** //
         if ($(".menu-slider").length > 0){
-            $('.menu-slider').owlCarousel({
+if (typeof $.fn.owlCarousel === "function") {
+            if (typeof $.fn.owlCarousel === "function") {
+$('.menu-slider').owlCarousel({
                 loop:true,
                 nav: true,
                 dots: false,
@@ -172,12 +174,16 @@ $(function() {
                     },
                 }
             });
+}
+}
         }
         
 
         // ***** Testimonials Slider Start ***** //
         if ($(".testimonials-slider").length > 0){
-            $('.testimonials-slider').owlCarousel({
+if (typeof $.fn.owlCarousel === "function") {
+            if (typeof $.fn.owlCarousel === "function") {
+$('.testimonials-slider').owlCarousel({
                 loop:true,
                 nav: true,
                 dots: false,
@@ -206,6 +212,8 @@ $(function() {
                     },
                 }
             });
+}
+}
         }    
     
     });
@@ -232,16 +240,9 @@ $(function() {
 });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+// ==== BURGER MENU FUNCTIONALITY ====
+$(document).ready(function () {
+  $('.menu-toggle').click(function () {
+    $('.menu').toggleClass('menu-open');
+  });
+});

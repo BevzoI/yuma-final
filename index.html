@@ -68,7 +68,8 @@
                 <div class="menu-toggle">
                   <span></span>
                 </div>
-                <div class="menu">
+                <div class="menu-toggle"><span></span></div>
+<div class="menu">
                   <div class="sidemenu-header">
                     <div class="sidemenu-logo">
                       <img src="./images/yuma/logo.svg" alt="Brand Logo" />
@@ -223,7 +224,7 @@
         <!-- Šunková pizza -->
         <div class="product-card">
           <div class="product-image">
-            <img src="./images/yuma/pizza/Pizza šunková-Photoroom.png" alt="Šunková pizza">
+            <img src="./images/yuma/pizza/Pizza se šunkou-Photoroom.png" alt="Šunková pizza">
           </div>
           <div class="product-info">
             <h3 class="product-title">Šunková pizza</h3>
@@ -291,7 +292,7 @@
         <!-- Tono -->
 <div class="product-card">
   <div class="product-image">
-    <img src="./images/yuma/pizza/Pizza Tono-Photoroom.png" alt="Tono">
+    <img src="./images/yuma/pizza/Pizza s tuňákem-Photoroom.png" alt="Tono">
   </div>
   <div class="product-info">
     <h3 class="product-title">Tono</h3>
@@ -376,7 +377,7 @@
 <!-- Nizza -->
 <div class="product-card">
   <div class="product-image">
-    <img src="./images/yuma/pizza/Pizza Nizza-Photoroom.png" alt="Nizza">
+    <img src="./images/yuma/pizza/Nicce-Photoroom.png" alt="Nizza">
   </div>
   <div class="product-info">
     <h3 class="product-title">Nizza</h3>
@@ -393,7 +394,7 @@
       <!-- Prosiuto di Parma + hruška a gorgonzola -->
 <div class="product-card">
   <div class="product-image">
-    <img src="./images/yuma/pizza/Prosiuto gorgonzola-Photoroom.png" alt="Prosiuto di Parma + hruška a gorgonzola">
+    <img src="./images/yuma/pizza/Prosciutto diParma-Photoroom.png" alt="Prosiuto di Parma + hruška a gorgonzola">
   </div>
   <div class="product-info">
     <h3 class="product-title">Prosiuto di Parma + hruška a gorgonzola</h3>
@@ -427,7 +428,7 @@
 <!-- Roastbeef -->
 <div class="product-card">
   <div class="product-image">
-    <img src="./images/yuma/pizza/Pizza Roastbeef-Photoroom.png" alt="Roastbeef">
+    <img src="./images/yuma/pizza/Roastbeef-Photoroom.png" alt="Roastbeef">
   </div>
   <div class="product-info">
     <h3 class="product-title">Roastbeef</h3>
@@ -478,7 +479,7 @@
 <!-- Royal black -->
 <div class="product-card">
   <div class="product-image">
-    <img src="./images/yuma/pizza/Pizza Royal Black-Photoroom.png" alt="Royal black">
+    <img src="./images/yuma/pizza/Royal black-Photoroom-Photoroom.png" alt="Royal black">
   </div>
   <div class="product-info">
     <h3 class="product-title">Royal black</h3>
@@ -1345,5 +1346,17 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 </script>
 
-  </body>
+  
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function () {
+    $(".menu-toggle, .sidemenu-close").click(function () {
+      $(".menu").slideToggle();
+      $(".dropdown-content").slideUp(200);
+      $(".opener").removeClass("active");
+    });
+  });
+</script>
+</body>
+
 </html>
