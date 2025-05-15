@@ -7985,3 +7985,57 @@ header .menu-toggle {
   }
 }
 
+/* === BURGER MENU (Mobile Styles) === */
+@media (max-width: 991px) {
+  .menu-toggle {
+    display: block !important;
+    cursor: pointer;
+    width: 30px;
+    height: 25px;
+    position: relative;
+    z-index: 1001;
+  }
+
+  .menu-toggle span,
+  .menu-toggle span::before,
+  .menu-toggle span::after {
+    display: block;
+    background: #000;
+    height: 3px;
+    width: 100%;
+    border-radius: 2px;
+    position: absolute;
+    content: "";
+    transition: all 0.3s ease;
+  }
+
+  .menu-toggle span::before {
+    top: -8px;
+  }
+
+  .menu-toggle span::after {
+    bottom: -8px;
+  }
+
+  /* Ховає горизонтальне меню на мобільних */
+  .menu > ul {
+    display: none !important;
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  /* Показує меню при відкритті */
+  .menu.menu-open > ul {
+    display: flex !important;
+  }
+
+  /* Приховати іконки пошуку/кошика при потребі */
+  .icon-menu {
+    display: none;
+  }
+
+  /* Зменшити логотип */
+  .header-logo img {
+    max-width: 140px;
+  }
+}
